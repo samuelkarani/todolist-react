@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import DatePicker from "react-datepicker";
-
 export default class Todo extends Component {
   render() {
     const {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Todo from "./Todo";
 import axios from "axios";
 import moment from "moment";
+// import DatePicker from "react-datepicker";
 
 const enrichTodoList = todos =>
   todos.map(todo =>
@@ -16,6 +17,7 @@ export default class TodoList extends Component {
   state = {
     todos: []
   };
+
   componentDidMount = () => {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
@@ -79,7 +81,6 @@ export default class TodoList extends Component {
 
   render() {
     const { todos } = this.state;
-
     return (
       <div>
         <ul className="uk-list">
