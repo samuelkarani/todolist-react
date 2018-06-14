@@ -5,7 +5,16 @@ import TodoList from "./TodoList";
 
 class App extends Component {
   render() {
-    return <TodoList />;
+    return (
+      <div>
+        <img src={logo} alt="" width="300" />
+        <div className="uk-section">
+          <div className="uk-container">
+            <TodoList />
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
