@@ -7,15 +7,24 @@ export default class Todo extends Component {
       id,
       completed,
       title,
+      reminderDateTime,
+      isStarred,
       handleToggleComplete,
       handleChangeTitle,
       handleChangeReminder,
       handleRemove,
-      reminderDateTime
+      handleToggleStar
     } = this.props;
     return (
       <li>
         <div className="uk-flex uk-flex-middle uk-grid">
+          <div>
+            <a
+              href=""
+              uk-icon="icon: star"
+              onClick={() => handleToggleStar(!isStarred, id)}
+            />
+          </div>
           <div>
             <input
               className="uk-checkbox"
@@ -36,6 +45,7 @@ export default class Todo extends Component {
 
           <div>
             <a uk-icon="clock" onClick={() => handleChangeReminder(id)} />
+            <span>{reminderDateTime}</span>
           </div>
           <div>
             <button
@@ -55,8 +65,10 @@ Todo.propTypes = {
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   reminderDateTime: PropTypes.bool.isRequired,
+  isStarred: PropTypes.bool.isRequired,
   handleToggleComplete: PropTypes.func.isRequired,
   handleChangeTitle: PropTypes.func.isRequired,
   handleChangeReminder: PropTypes.func.isRequired,
-  handleRemove: PropTypes.func.isRequired
+  handleRemove: PropTypes.func.isRequired,
+  handleToggleStar: PropTypes.func.isRequired
 };

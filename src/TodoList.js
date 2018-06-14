@@ -3,7 +3,9 @@ import Todo from "./Todo";
 import axios from "axios";
 
 const enrichTodoList = todos =>
-  todos.map(todo => Object.assign(todo, { reminderDateTime: false }));
+  todos.map(todo =>
+    Object.assign(todo, { reminderDateTime: false, isStarred: false })
+  );
 
 export default class TodoList extends Component {
   state = {
@@ -32,6 +34,15 @@ export default class TodoList extends Component {
       const todos = prevState.todos.map(
         todo =>
           todo.id === id ? Object.assign(todo, { reminderDateTime }) : todo
+      );
+      return { todos };
+    });
+  };
+
+  handleToggleStar = (isStarred, id) => {
+    this.setState(prevState => {
+      const todos = prevState.todos.map(
+        todo => (todo.id === id ? Object.assign(todo, { isStarred }) : todo)
       );
       return { todos };
     });
@@ -73,11 +84,13 @@ export default class TodoList extends Component {
               id={todo.id}
               title={todo.title}
               completed={todo.completed}
+              isStarred={todo.isStarred}
               reminderDateTime={todo.reminderDateTime}
               handleToggleComplete={this.handleToggleComplete}
               handleChangeTitle={this.handleChangeTitle}
               handleChangeReminder={this.handleChangeReminder}
               handleRemove={this.handleRemove}
+              handleToggleStar={this.handleToggleStar}
             />
           ))}
         </ul>
