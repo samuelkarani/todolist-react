@@ -8,7 +8,10 @@ export default class Todo extends Component {
       completed,
       title,
       handleToggleComplete,
-      handleChangeTitle
+      handleChangeTitle,
+      handleStar,
+      handleRemove,
+      isStarred
     } = this.props;
     return (
       <li>
@@ -30,7 +33,21 @@ export default class Todo extends Component {
               onChange={e => handleChangeTitle(e.target.value, id)}
             />
           </div>
-          <div>x</div>
+          <div>
+            <a
+              href=""
+              uk-icon="star"
+              onClick={e => handleStar(!isStarred, id)}
+            />
+          </div>
+          <div>
+            <a
+              href=""
+              className="uk-icon-link"
+              uk-icon="close"
+              onClick={() => handleRemove(id)}
+            />
+          </div>
         </div>
       </li>
     );
@@ -41,6 +58,9 @@ Todo.propTypes = {
   id: PropTypes.number.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+  isStarred: PropTypes.bool.isRequired,
   handleToggleComplete: PropTypes.func.isRequired,
-  handleChangeTitle: PropTypes.func.isRequired
+  handleChangeTitle: PropTypes.func.isRequired,
+  handleStar: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired
 };
