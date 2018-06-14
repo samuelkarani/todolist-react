@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 import axios from "axios";
-import moment from "moment";
-// import DatePicker from "react-datepicker";
 
 const enrichTodoList = todos =>
   todos.map(todo =>
     Object.assign(todo, {
       reminderDateTime: false,
       isStarred: false,
-      reminderDateTime: moment()
+      reminderDateTime: false
     })
   );
 
