@@ -56,7 +56,7 @@ export default class Todo extends Component {
               dateFormat="LLL"
               timeCaption="time"
               isClearable={false}
-              popperPlacement="top-end"
+              popperPlacement="left-start"
               className="uk-input"
             />
           </div>
