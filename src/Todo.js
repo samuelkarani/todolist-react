@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import DatePicker from "react-datepicker";
+
 export default class Todo extends Component {
   render() {
     const {
@@ -45,6 +47,7 @@ export default class Todo extends Component {
 
           <div>
             <a uk-icon="clock" onClick={() => handleChangeReminder(id)} />
+
             <span>{reminderDateTime}</span>
           </div>
           <div>

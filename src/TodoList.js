@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 import axios from "axios";
+import moment from "moment";
 
 const enrichTodoList = todos =>
   todos.map(todo =>
-    Object.assign(todo, { reminderDateTime: false, isStarred: false })
+    Object.assign(todo, {
+      reminderDateTime: false,
+      isStarred: false,
+      reminderDateTime: moment()
+    })
   );
 
 export default class TodoList extends Component {
