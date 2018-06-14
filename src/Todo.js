@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class Todo extends Component {
   render() {
@@ -7,11 +9,11 @@ export default class Todo extends Component {
       id,
       completed,
       title,
-      reminderDateTime,
+      date,
       isStarred,
       handleToggleComplete,
       handleChangeTitle,
-      handleChangeReminder,
+      handleChangeDate,
       handleRemove,
       handleToggleStar
     } = this.props;
@@ -44,9 +46,19 @@ export default class Todo extends Component {
           </div>
 
           <div>
-            <a uk-icon="clock" onClick={() => handleChangeReminder(id)} />
-
-            <span>{reminderDateTime}</span>
+            {/* <a uk-icon="clock" onClick={() => handleChangeDate(id)} /> */}
+            <DatePicker
+              selected={date}
+              onChange={date => handleChangeDate(date, id)}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="LLL"
+              timeCaption="time"
+              isClearable={false}
+              popperPlacement="top-end"
+              className="uk-input"
+            />
           </div>
           <div>
             <button
@@ -65,11 +77,11 @@ Todo.propTypes = {
   id: PropTypes.number.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  reminderDateTime: PropTypes.bool.isRequired,
+  date: PropTypes.object.isRequired,
   isStarred: PropTypes.bool.isRequired,
   handleToggleComplete: PropTypes.func.isRequired,
   handleChangeTitle: PropTypes.func.isRequired,
-  handleChangeReminder: PropTypes.func.isRequired,
   handleRemove: PropTypes.func.isRequired,
-  handleToggleStar: PropTypes.func.isRequired
+  handleToggleStar: PropTypes.func.isRequired,
+  handleChangeDate: PropTypes.func.isRequired
 };

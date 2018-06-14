@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
 import axios from "axios";
+import moment from "moment";
 
 const enrichTodoList = todos =>
   todos.map(todo =>
     Object.assign(todo, {
-      reminderDateTime: false,
-      isStarred: false,
-      reminderDateTime: false
+      date: moment(),
+      isStarred: false
     })
   );
 
@@ -34,11 +34,10 @@ export default class TodoList extends Component {
     });
   };
 
-  handleChangeReminder = (reminderDateTime, id) => {
+  handleChangeDate = (date, id) => {
     this.setState(prevState => {
       const todos = prevState.todos.map(
-        todo =>
-          todo.id === id ? Object.assign(todo, { reminderDateTime }) : todo
+        todo => (todo.id === id ? Object.assign(todo, { date }) : todo)
       );
       return { todos };
     });
@@ -89,10 +88,10 @@ export default class TodoList extends Component {
               title={todo.title}
               completed={todo.completed}
               isStarred={todo.isStarred}
-              reminderDateTime={todo.reminderDateTime}
+              date={todo.date}
               handleToggleComplete={this.handleToggleComplete}
               handleChangeTitle={this.handleChangeTitle}
-              handleChangeReminder={this.handleChangeReminder}
+              handleChangeDate={this.handleChangeDate}
               handleRemove={this.handleRemove}
               handleToggleStar={this.handleToggleStar}
             />
