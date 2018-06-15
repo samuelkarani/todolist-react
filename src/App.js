@@ -3,6 +3,7 @@ import logo from "./logo.png";
 import "./App.css";
 import TodoList from "./TodoList";
 import Categories from "./Categories";
+import Appbar from "./Appbar";
 
 class App extends Component {
   render() {
@@ -11,6 +12,9 @@ class App extends Component {
         <img src={logo} alt="" width="300" />
         <div className="uk-section">
           <div className="uk-container">
+            <div>
+              <Appbar />
+            </div>
             <div className="uk-flex uk-grid">
               <div>
                 <Categories />
