@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.png";
 import "./App.css";
 import TodoList from "./TodoList";
+import Categories from "./Categories";
 
 class App extends Component {
   render() {
@@ -10,7 +11,14 @@ class App extends Component {
         <img src={logo} alt="" width="300" />
         <div className="uk-section">
           <div className="uk-container">
-            <TodoList />
+            <div className="uk-flex uk-grid">
+              <div>
+                <Categories />
+              </div>
+              <div className="uk-width-expand">
+                <TodoList />
+              </div>
+            </div>
           </div>
         </div>
       </div>
