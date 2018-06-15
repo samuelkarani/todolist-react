@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Search from "./Search";
 
 export default class AppBar extends PureComponent {
   render() {
@@ -7,7 +8,9 @@ export default class AppBar extends PureComponent {
       allCompleted,
       handleToggleCompleteAll,
       handleClearCompleted,
-      handleAdd
+      handleAdd,
+      handleSearch,
+      filter
     } = this.props;
     return (
       <div className="uk-flex uk-flex-middle uk-flex-between">
@@ -18,12 +21,17 @@ export default class AppBar extends PureComponent {
               type="checkbox"
               checked={allCompleted}
               onChange={handleToggleCompleteAll}
+              filter={filter}
             />
           </div>
 
-          <div>
+          {/* <div>
             <button href="" uk-marker="" onClick={handleAdd} />
-          </div>
+          </div> */}
+        </div>
+
+        <div>
+          <Search handleSearch={handleSearch} filter={filter} />
         </div>
 
         <div>
@@ -43,5 +51,7 @@ AppBar.propTypes = {
   allCompleted: PropTypes.bool.isRequired,
   handleClearCompleted: PropTypes.func.isRequired,
   handleToggleCompleteAll: PropTypes.func.isRequired,
-  handleAdd: PropTypes.func.isRequired
+  handleAdd: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired
 };

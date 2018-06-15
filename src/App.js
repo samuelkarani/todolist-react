@@ -9,7 +9,8 @@ import AppBar from "./AppBar";
 class App extends PureComponent {
   state = {
     todoList: [],
-    allCompleted: false
+    allCompleted: false,
+    filter: ""
   };
 
   componentDidMount = () => {
@@ -22,9 +23,15 @@ class App extends PureComponent {
         )
       )
       .then(todoList => this.setState({ todoList }))
-      .catch(err => {
+      .catch(() => {
         console.error("could not fetch todoList");
       });
+  };
+
+  handleSearch = phrase => {
+    this.setState({
+      filter: phrase.toLowerCase()
+    });
   };
 
   handleClearCompleted = () => {
@@ -102,8 +109,11 @@ class App extends PureComponent {
     });
   };
 
+  handleFilter = () =>
+    this.state.todoList.filter(todo => todo.title.includes(this.state.filter));
+
   render() {
-    const { todoList, allCompleted } = this.state;
+    const { allCompleted, filter } = this.state;
     return (
       <div>
         <div>
@@ -113,14 +123,16 @@ class App extends PureComponent {
         <div className="uk-section uk-section-xsmall">
           <div className="uk-container">
             <AppBar
+              filter={filter}
               allCompleted={allCompleted}
               handleAdd={this.handleAdd}
               handleClearCompleted={this.handleClearCompleted}
               handleToggleCompleteAll={this.handleToggleCompleteAll}
+              handleSearch={this.handleSearch}
             />
             <hr />
             <TodoList
-              todoList={todoList}
+              todoList={this.handleFilter()}
               handleToggleComplete={this.handleToggleComplete}
               handleChangeTitle={this.handleChangeTitle}
               handleRemove={this.handleRemove}
