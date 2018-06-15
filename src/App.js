@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
+import axios from "axios";
 import logo from "./logo.png";
 import "./App.css";
+import Todo from "./Todo";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
-import axios from "axios";
 
 class App extends PureComponent {
   state = {
@@ -15,6 +16,11 @@ class App extends PureComponent {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
       .then(res => res.data)
+      .then(todoList =>
+        todoList.map(
+          ({ title, completed, id }) => new Todo({ title, completed, id })
+        )
+      )
       .then(todoList => this.setState({ todoList }))
       .catch(err => {
         console.error("could not fetch todoList");
@@ -44,13 +50,11 @@ class App extends PureComponent {
   handleAdd = () => {
     this.setState(prevState => {
       const todoList = prevState.todoList.slice();
-      todoList.unshift({ id: Date.now(), completed: false, title: "" });
+      todoList.unshift(new Todo());
 
       return { todoList };
     });
   };
-
-  handleSave = (title, id) => {};
 
   handleRemove = id => {
     this.setState(prevState => {
