@@ -47,6 +47,7 @@ export default class Todo extends Component {
 
           <div>
             {/* <a uk-icon="clock" onClick={() => handleChangeDate(id)} /> */}
+
             <DatePicker
               selected={date}
               onChange={date => handleChangeDate(date, id)}
