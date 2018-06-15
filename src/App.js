@@ -5,6 +5,7 @@ import Todo from "./classes/todo";
 import Category from "./classes/category";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
+import { Categories, FilterControls } from "./Pieces";
 
 const SEARCH_SHOW = 10;
 
@@ -123,11 +124,25 @@ class App extends PureComponent {
     });
   };
 
+  handleAddCategory = name => {
+    this.setState(prevState => {
+      const categories = prevState.categories;
+      categories.push(
+        new Category({
+          name
+        })
+      );
+      return {
+        categories: categories.slice()
+      };
+    });
+  };
+
   handleFilter = () =>
     this.state.todoList.filter(todo => todo.title.includes(this.state.filter));
 
   render() {
-    const { allCompleted, filter } = this.state;
+    const { allCompleted, filter, categories } = this.state;
     const todos = this.handleFilter();
     return (
       <div>
@@ -143,19 +158,15 @@ class App extends PureComponent {
               handleSearch={this.handleSearch}
             />
             <hr />
+            <div>
+              <Categories
+                categories={categories}
+                handleAddCategory={this.handleAddCategory}
+              />
+            </div>
 
             <div uk-filter="target: .js-filter">
-              <ul className="uk-subnav uk-subnav-pill">
-                <li className="uk-active" uk-filter-control="">
-                  <a>All</a>
-                </li>
-                <li uk-filter-control="[data-status='active']">
-                  <a>Active</a>
-                </li>
-                <li uk-filter-control="[data-status='completed']">
-                  <a>Completed</a>
-                </li>
-              </ul>
+              <FilterControls />
               <TodoList
                 todoList={todos}
                 handleToggleComplete={this.handleToggleComplete}
