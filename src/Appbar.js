@@ -10,6 +10,7 @@ export default class AppBar extends PureComponent {
       handleClearCompleted,
       handleAdd,
       handleSearch,
+      showSearch,
       filter
     } = this.props;
     return (
@@ -30,9 +31,11 @@ export default class AppBar extends PureComponent {
           </div> */}
         </div>
 
-        <div>
-          <Search handleSearch={handleSearch} filter={filter} />
-        </div>
+        {showSearch && (
+          <div>
+            <Search handleSearch={handleSearch} filter={filter} />
+          </div>
+        )}
 
         {/* TODO */}
         {/* <div>
@@ -60,5 +63,6 @@ AppBar.propTypes = {
   handleToggleCompleteAll: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired
+  filter: PropTypes.string.isRequired,
+  showSearch: PropTypes.bool.isRequired
 };

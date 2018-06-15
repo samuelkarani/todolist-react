@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
-import logo from "./logo.png";
 import "./App.css";
 import Todo from "./classes/todo";
 import Category from "./classes/category";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
+
+const SEARCH_SHOW = 10;
 
 const assignCategories = (todoList, categories) => {
   todoList.forEach(todo => {
@@ -127,16 +128,14 @@ class App extends PureComponent {
 
   render() {
     const { allCompleted, filter } = this.state;
+    const todos = this.handleFilter();
     return (
       <div>
-        <div>
-          <img src={logo} alt="" width="180" />
-        </div>
-
         <div className="uk-section uk-section-xsmall">
           <div className="uk-container">
             <AppBar
               filter={filter}
+              showSearch={todos.length > SEARCH_SHOW}
               allCompleted={allCompleted}
               handleAdd={this.handleAdd}
               handleClearCompleted={this.handleClearCompleted}
@@ -145,7 +144,7 @@ class App extends PureComponent {
             />
             <hr />
             <TodoList
-              todoList={this.handleFilter()}
+              todoList={todos}
               handleToggleComplete={this.handleToggleComplete}
               handleChangeTitle={this.handleChangeTitle}
               handleRemove={this.handleRemove}
