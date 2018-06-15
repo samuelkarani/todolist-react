@@ -5,7 +5,7 @@ import Todo from "./classes/todo";
 import Category from "./classes/category";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
-import { Categories, FilterControls } from "./Pieces";
+import { Categories, FilterControls } from "./FilterControls";
 
 const SEARCH_SHOW = 10;
 
