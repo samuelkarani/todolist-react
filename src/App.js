@@ -164,7 +164,6 @@ class App extends PureComponent {
                 handleAddCategory={this.handleAddCategory}
               />
             </div>
-
             <div uk-filter="target: .js-filter">
               <FilterControls />
               <TodoList
