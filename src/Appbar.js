@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-export default class AppBar extends Component {
+export default class AppBar extends PureComponent {
   render() {
     const {
       allCompleted,
       handleToggleCompleteAll,
-      handleClearCompleted
+      handleClearCompleted,
+      handleAdd
     } = this.props;
     return (
       <div className="uk-flex uk-flex-middle uk-flex-between">
@@ -17,6 +18,10 @@ export default class AppBar extends Component {
             checked={allCompleted}
             onChange={handleToggleCompleteAll}
           />
+        </div>
+
+        <div>
+          <button href="" uk-marker="" onClick={handleAdd} />
         </div>
 
         <div>
@@ -35,5 +40,6 @@ export default class AppBar extends Component {
 AppBar.propTypes = {
   allCompleted: PropTypes.bool.isRequired,
   handleClearCompleted: PropTypes.func.isRequired,
-  handleToggleCompleteAll: PropTypes.func.isRequired
+  handleToggleCompleteAll: PropTypes.func.isRequired,
+  handleAdd: PropTypes.func.isRequired
 };

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import TodoItem from "./TodoItem";
 import PropTypes from "prop-types";
 
-export default class TodoList extends Component {
+export default class TodoList extends PureComponent {
   render() {
     const { todoList } = this.props;
     return (

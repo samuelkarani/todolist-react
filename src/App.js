@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import logo from "./logo.png";
 import "./App.css";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
 import axios from "axios";
 
-class App extends Component {
+class App extends PureComponent {
   state = {
     todoList: [],
     allCompleted: false
@@ -24,7 +24,7 @@ class App extends Component {
   handleClearCompleted = () => {
     this.setState(prevState => {
       const todoList = prevState.todoList.filter(
-        todo => todo.completed === true
+        todo => todo.completed !== true
       );
       return { todoList };
     });
@@ -40,6 +40,17 @@ class App extends Component {
       return { todoList, allCompleted };
     });
   };
+
+  handleAdd = () => {
+    this.setState(prevState => {
+      const todoList = prevState.todoList.slice();
+      todoList.unshift({ id: Date.now(), completed: false, title: "" });
+
+      return { todoList };
+    });
+  };
+
+  handleSave = (title, id) => {};
 
   handleRemove = id => {
     this.setState(prevState => {
@@ -84,6 +95,7 @@ class App extends Component {
           <div className="uk-container">
             <AppBar
               allCompleted={allCompleted}
+              handleAdd={this.handleAdd}
               handleClearCompleted={this.handleClearCompleted}
               handleToggleCompleteAll={this.handleToggleCompleteAll}
             />
