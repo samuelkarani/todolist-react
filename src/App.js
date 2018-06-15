@@ -3,14 +3,26 @@ import axios from "axios";
 import logo from "./logo.png";
 import "./App.css";
 import Todo from "./classes/todo";
+import Category from "./classes/category";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
 
+const assignCategories = (todoList, categories) => {
+  todoList.forEach(todo => {
+    const randomIdx = Math.floor(Math.random() * categories.length);
+    categories[randomIdx].addTodo(todo);
+  });
+  return todoList;
+};
 class App extends PureComponent {
   state = {
     todoList: [],
     allCompleted: false,
-    filter: ""
+    filter: "",
+    categories: [
+      new Category({ name: "personal" }),
+      new Category({ name: "work" })
+    ]
   };
 
   componentDidMount = () => {
@@ -22,6 +34,7 @@ class App extends PureComponent {
           ({ title, completed, id }) => new Todo({ title, completed, id })
         )
       )
+      .then(todoList => assignCategories(todoList, this.state.categories))
       .then(todoList => this.setState({ todoList }))
       .catch(() => {
         console.error("could not fetch todoList");
