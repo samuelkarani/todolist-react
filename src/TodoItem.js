@@ -16,6 +16,12 @@ export default class TodoItem extends PureComponent {
       <li>
         <div className="uk-flex uk-flex-middle uk-grid">
           <div>
+            <span
+              className="uk-sortable-handle uk-margin-small-right"
+              uk-icon="icon: table"
+            />
+          </div>
+          <div>
             <input
               className="uk-checkbox"
               type="checkbox"

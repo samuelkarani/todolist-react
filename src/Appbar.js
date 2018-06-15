@@ -34,6 +34,13 @@ export default class AppBar extends PureComponent {
           <Search handleSearch={handleSearch} filter={filter} />
         </div>
 
+        {/* TODO */}
+        {/* <div>
+          <button className="uk-button uk-button-default uk-form-small">
+            Organize
+          </button>
+        </div> */}
+
         <div>
           <button
             className="uk-button uk-button-small uk-button-default"

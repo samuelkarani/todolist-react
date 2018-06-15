@@ -8,7 +8,10 @@ export default class TodoList extends PureComponent {
     const { todoList } = this.props;
     return (
       <div>
-        <ul className="uk-list uk-list-divider">
+        <ul
+          className="uk-list uk-list-divider"
+          uk-sortable="handle: .uk-sortable-handle"
+        >
           {todoList.map(todo => (
             <TodoItem
               key={todo.id}

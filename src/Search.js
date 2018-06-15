@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 const Search = ({ handleSearch, filter }) => {
   return (
     <form className="uk-search uk-search-default">
-      <a href="" className="uk-search-icon-flip" uk-search-icon="" />
       <input
-        className="uk-search-input"
+        className="uk-search-input uk-form-small"
         type="search"
         placeholder="Search..."
         onChange={e => handleSearch(e.target.value)}
