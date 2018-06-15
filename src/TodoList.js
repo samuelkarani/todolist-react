@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import Todo from "./Todo";
+import TodoItem from "./TodoItem";
 import axios from "axios";
-import moment from "moment";
 
 const enrichTodoList = todos =>
   todos.map(todo =>
     Object.assign(todo, {
-      date: moment(),
       isStarred: false
     })
   );
@@ -30,15 +28,6 @@ export default class TodoList extends Component {
   handleRemove = id => {
     this.setState(prevState => {
       const todos = prevState.todos.filter(todo => todo.id !== id);
-      return { todos };
-    });
-  };
-
-  handleChangeDate = (date, id) => {
-    this.setState(prevState => {
-      const todos = prevState.todos.map(
-        todo => (todo.id === id ? Object.assign(todo, { date }) : todo)
-      );
       return { todos };
     });
   };
@@ -82,16 +71,14 @@ export default class TodoList extends Component {
       <div>
         <ul className="uk-list">
           {todos.map(todo => (
-            <Todo
+            <TodoItem
               key={todo.id}
               id={todo.id}
               title={todo.title}
               completed={todo.completed}
               isStarred={todo.isStarred}
-              date={todo.date}
               handleToggleComplete={this.handleToggleComplete}
               handleChangeTitle={this.handleChangeTitle}
-              handleChangeDate={this.handleChangeDate}
               handleRemove={this.handleRemove}
               handleToggleStar={this.handleToggleStar}
             />

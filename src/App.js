@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import logo from "./logo.png";
 import "./App.css";
 import TodoList from "./TodoList";
-import Categories from "./Categories";
 
 class App extends Component {
   render() {
@@ -12,9 +11,6 @@ class App extends Component {
         <div className="uk-section">
           <div className="uk-container">
             <div className="uk-flex uk-grid">
-              <div>
-                <Categories />
-              </div>
               <div className="uk-width-expand">
                 <TodoList />
               </div>
