@@ -75,16 +75,12 @@ class App extends PureComponent {
     this.setState(prevState => {
       const todoList = prevState.todoList;
       const idx = todoList.findIndex(todo => todo.id === id);
-
       const todo = todoList[idx];
-
       const duplicatedTodo = new Todo({
         completed: todo.completed,
         title: todo.title
       });
-
       todoList.splice(idx + 1, 0, duplicatedTodo);
-
       return {
         todoList: todoList.slice()
       };
