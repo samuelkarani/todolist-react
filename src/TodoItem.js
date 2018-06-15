@@ -7,22 +7,13 @@ export default class TodoItem extends Component {
       id,
       completed,
       title,
-      isStarred,
       handleToggleComplete,
       handleChangeTitle,
-      handleRemove,
-      handleToggleStar
+      handleRemove
     } = this.props;
     return (
       <li>
         <div className="uk-flex uk-flex-middle uk-grid">
-          <div>
-            <a
-              href=""
-              uk-icon="icon: star"
-              onClick={() => handleToggleStar(!isStarred, id)}
-            />
-          </div>
           <div>
             <input
               className="uk-checkbox"
@@ -58,9 +49,7 @@ TodoItem.propTypes = {
   id: PropTypes.number.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  isStarred: PropTypes.bool.isRequired,
   handleToggleComplete: PropTypes.func.isRequired,
   handleChangeTitle: PropTypes.func.isRequired,
-  handleRemove: PropTypes.func.isRequired,
-  handleToggleStar: PropTypes.func.isRequired
+  handleRemove: PropTypes.func.isRequired
 };
