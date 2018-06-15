@@ -18,6 +18,7 @@ export default class TodoList extends PureComponent {
               handleToggleComplete={this.props.handleToggleComplete}
               handleChangeTitle={this.props.handleChangeTitle}
               handleRemove={this.props.handleRemove}
+              handleDuplicate={this.props.handleDuplicate}
             />
           ))}
         </ul>

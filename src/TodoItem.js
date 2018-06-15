@@ -9,7 +9,8 @@ export default class TodoItem extends PureComponent {
       title,
       handleToggleComplete,
       handleChangeTitle,
-      handleRemove
+      handleRemove,
+      handleDuplicate
     } = this.props;
     return (
       <li>
@@ -35,6 +36,13 @@ export default class TodoItem extends PureComponent {
           <div>
             <button
               className="uk-icon-link"
+              uk-icon="copy"
+              onClick={() => handleDuplicate(id)}
+            />
+          </div>
+          <div>
+            <button
+              className="uk-icon-link"
               uk-icon="close"
               onClick={() => handleRemove(id)}
             />
@@ -51,5 +59,6 @@ TodoItem.propTypes = {
   title: PropTypes.string.isRequired,
   handleToggleComplete: PropTypes.func.isRequired,
   handleChangeTitle: PropTypes.func.isRequired,
-  handleRemove: PropTypes.func.isRequired
+  handleRemove: PropTypes.func.isRequired,
+  handleDuplicate: PropTypes.func.isRequired
 };

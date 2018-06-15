@@ -51,7 +51,6 @@ class App extends PureComponent {
     this.setState(prevState => {
       const todoList = prevState.todoList.slice();
       todoList.unshift(new Todo());
-
       return { todoList };
     });
   };
@@ -69,6 +68,26 @@ class App extends PureComponent {
         todo => (todo.id === id ? Object.assign(todo, { title }) : todo)
       );
       return { todoList };
+    });
+  };
+
+  handleDuplicate = id => {
+    this.setState(prevState => {
+      const todoList = prevState.todoList;
+      const idx = todoList.findIndex(todo => todo.id === id);
+
+      const todo = todoList[idx];
+
+      const duplicatedTodo = new Todo({
+        completed: todo.completed,
+        title: todo.title
+      });
+
+      todoList.splice(idx + 1, 0, duplicatedTodo);
+
+      return {
+        todoList: todoList.slice()
+      };
     });
   };
 
@@ -109,6 +128,7 @@ class App extends PureComponent {
               handleToggleComplete={this.handleToggleComplete}
               handleChangeTitle={this.handleChangeTitle}
               handleRemove={this.handleRemove}
+              handleDuplicate={this.handleDuplicate}
             />
           </div>
         </div>
