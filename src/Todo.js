@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./todo.css";
 
 export default class Todo extends Component {
   render() {
@@ -47,7 +48,6 @@ export default class Todo extends Component {
 
           <div>
             {/* <a uk-icon="clock" onClick={() => handleChangeDate(id)} /> */}
-
             <DatePicker
               selected={date}
               onChange={date => handleChangeDate(date, id)}
