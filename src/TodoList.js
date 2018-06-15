@@ -1,13 +1,14 @@
 import React, { PureComponent } from "react";
 import TodoItem from "./TodoItem";
 import PropTypes from "prop-types";
+import Todo from "./todo";
 
 export default class TodoList extends PureComponent {
   render() {
     const { todoList } = this.props;
     return (
       <div>
-        <ul className="uk-list">
+        <ul className="uk-list uk-list-divider">
           {todoList.map(todo => (
             <TodoItem
               key={todo.id}
@@ -26,5 +27,5 @@ export default class TodoList extends PureComponent {
 }
 
 TodoList.propTypes = {
-  todoList: PropTypes.array.isRequired
+  todoList: PropTypes.arrayOf(PropTypes.instanceOf(Todo))
 };

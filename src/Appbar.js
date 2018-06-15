@@ -11,17 +11,19 @@ export default class AppBar extends PureComponent {
     } = this.props;
     return (
       <div className="uk-flex uk-flex-middle uk-flex-between">
-        <div>
-          <input
-            className="uk-checkbox"
-            type="checkbox"
-            checked={allCompleted}
-            onChange={handleToggleCompleteAll}
-          />
-        </div>
+        <div className="uk-flex uk-flex-middle uk-grid">
+          <div>
+            <input
+              className="uk-checkbox"
+              type="checkbox"
+              checked={allCompleted}
+              onChange={handleToggleCompleteAll}
+            />
+          </div>
 
-        <div>
-          <button href="" uk-marker="" onClick={handleAdd} />
+          <div>
+            <button href="" uk-marker="" onClick={handleAdd} />
+          </div>
         </div>
 
         <div>

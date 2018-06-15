@@ -24,7 +24,7 @@ export default class TodoItem extends PureComponent {
           </div>
           <div className="uk-width-expand">
             <input
-              className="uk-input uk-flex"
+              className="uk-input uk-form-blank"
               type="text"
               name="title"
               value={title}
