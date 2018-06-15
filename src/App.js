@@ -92,6 +92,21 @@ class App extends PureComponent {
     });
   };
 
+  handleToggleComplete = (completed, id) => {
+    this.setState(prevState => {
+      const todoList = prevState.todoList.map(todo => {
+        if (todo.id === id) {
+          return Object.assign(todo, { completed });
+        } else {
+          return todo;
+        }
+      });
+      return {
+        todoList
+      };
+    });
+  };
+
   handleDuplicate = id => {
     this.setState(prevState => {
       const todoList = prevState.todoList;
@@ -104,21 +119,6 @@ class App extends PureComponent {
       todoList.splice(idx + 1, 0, duplicatedTodo);
       return {
         todoList: todoList.slice()
-      };
-    });
-  };
-
-  handleToggleComplete = (completed, id) => {
-    this.setState(prevState => {
-      const todoList = prevState.todoList.map(todo => {
-        if (todo.id === id) {
-          return Object.assign(todo, { completed });
-        } else {
-          return todo;
-        }
-      });
-      return {
-        todoList
       };
     });
   };
@@ -143,13 +143,27 @@ class App extends PureComponent {
               handleSearch={this.handleSearch}
             />
             <hr />
-            <TodoList
-              todoList={todos}
-              handleToggleComplete={this.handleToggleComplete}
-              handleChangeTitle={this.handleChangeTitle}
-              handleRemove={this.handleRemove}
-              handleDuplicate={this.handleDuplicate}
-            />
+
+            <div uk-filter="target: .js-filter">
+              <ul className="uk-subnav uk-subnav-pill">
+                <li className="uk-active" uk-filter-control="">
+                  <a>All</a>
+                </li>
+                <li uk-filter-control="[data-status='active']">
+                  <a>Active</a>
+                </li>
+                <li uk-filter-control="[data-status='completed']">
+                  <a>Completed</a>
+                </li>
+              </ul>
+              <TodoList
+                todoList={todos}
+                handleToggleComplete={this.handleToggleComplete}
+                handleChangeTitle={this.handleChangeTitle}
+                handleRemove={this.handleRemove}
+                handleDuplicate={this.handleDuplicate}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -9,11 +9,12 @@ export default class TodoList extends PureComponent {
     return (
       <div>
         <ul
-          className="uk-list uk-list-divider"
+          className="uk-list uk-list-divider js-filter"
           uk-sortable="handle: .uk-sortable-handle"
         >
           {todoList.map(todo => (
             <TodoItem
+              status={todo.completed ? "completed" : "active"}
               key={todo.id}
               id={todo.id}
               title={todo.title}

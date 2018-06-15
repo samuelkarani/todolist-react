@@ -15,8 +15,7 @@ export default class Category {
   removeTodo(id) {
     this.todoItems = this.todoItems.filter(todo => todo.id !== id);
   }
-  // TODO
-  // static remove;
+
   editName(name) {
     this.name = name;
   }

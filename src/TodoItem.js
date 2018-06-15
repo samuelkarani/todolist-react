@@ -7,13 +7,14 @@ export default class TodoItem extends PureComponent {
       id,
       completed,
       title,
+      status,
       handleToggleComplete,
       handleChangeTitle,
       handleRemove,
       handleDuplicate
     } = this.props;
     return (
-      <li>
+      <li data-status={status}>
         <div className="uk-flex uk-flex-middle uk-grid">
           <div>
             <span
@@ -63,6 +64,7 @@ TodoItem.propTypes = {
   id: PropTypes.number.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
   handleToggleComplete: PropTypes.func.isRequired,
   handleChangeTitle: PropTypes.func.isRequired,
   handleRemove: PropTypes.func.isRequired,
