@@ -56,7 +56,7 @@ const TodoItem = ({
 );
 
 TodoItem.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,

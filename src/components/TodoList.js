@@ -19,7 +19,7 @@ const TodoList = ({
         <TodoItem
           status={todo.completed ? "completed" : "active"}
           key={todo.id}
-          id={todo.id}
+          id={todo.id.toString()}
           title={todo.title}
           completed={todo.completed}
           handleToggleComplete={handleToggleComplete}
@@ -33,7 +33,7 @@ const TodoList = ({
 );
 
 TodoList.propTypes = {
-  todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass))
+  todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired
 };
 
 export default TodoList;
