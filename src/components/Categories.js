@@ -44,7 +44,7 @@ export default class Categories extends PureComponent {
   };
 
   render() {
-    const { categories } = this.props;
+    const { categories, handleRemoveCategory, handleEditCategory } = this.props;
     return (
       <div>
         <ul className="uk-tab-right" uk-tab="">
@@ -53,7 +53,27 @@ export default class Categories extends PureComponent {
           </li>
           {categories.map(({ name, id }) => (
             <li key={id}>
-              <a>{name}</a>
+              <a className="uk-flex uk-flex-between">
+                <span>{name}</span>
+                <input
+                  class="uk-input uk-form-blank uk-form-width-small"
+                  type="text"
+                  value={name}
+                  hidden={isEditing}
+                />
+
+                <button
+                  href=""
+                  className="uk-icon-link"
+                  uk-icon="pencil"
+                  onClick={handleEditCategory}
+                />
+                <button
+                  type="button"
+                  uk-close=""
+                  onClick={handleRemoveCategory}
+                />
+              </a>
             </li>
           ))}
         </ul>
@@ -80,7 +100,7 @@ export default class Categories extends PureComponent {
 
 Categories.propTypes = {
   handleAddCategory: PropTypes.func.isRequired,
-  handleEditCategories: PropTypes.func.isRequired,
-  handleRemoveCategories: PropTypes.func.isRequired,
+  handleEditCategory: PropTypes.func.isRequired,
+  handleRemoveCategory: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.instanceOf(Category))
 };

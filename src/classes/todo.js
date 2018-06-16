@@ -10,5 +10,6 @@ export default class Todo {
     if (props && props.completed) this.completed = props.completed;
     else this.completed = false;
   }
-  // ?? instance methods ??
+
+  editTodo() {}
 }
