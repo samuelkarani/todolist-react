@@ -17,27 +17,35 @@ export default class Category extends PureComponent {
     });
   };
 
-  handleSave = e => {};
+  handleSave = e => {
+    this.props.handleEditCategory;
+  };
   render() {
+    const { category, handleRemoveCategory } = this.props;
     return (
       <li key={id}>
-        <a className="uk-flex uk-flex-between">
-          <span>{name}</span>
+        {isEditing ? (
           <input
             class="uk-input uk-form-blank uk-form-width-small"
             type="text"
             value={name}
-            hidden={isEditing}
           />
-
-          <button
-            href=""
-            className="uk-icon-link"
-            uk-icon="pencil"
-            onClick={handleEditCategory}
-          />
-          <button type="button" uk-close="" onClick={handleRemoveCategory} />
-        </a>
+        ) : (
+          <a className="uk-flex uk-flex-between">
+            <span>{name}</span>
+            <button
+              href=""
+              className="uk-icon-link"
+              uk-icon="pencil"
+              onClick={this.handleEdit}
+            />
+            <button
+              type="button"
+              uk-close=""
+              onClick={e => handleRemoveCategory(category.id)}
+            />
+          </a>
+        )}
       </li>
     );
   }

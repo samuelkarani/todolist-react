@@ -18,7 +18,7 @@ export default class Categories extends PureComponent {
     });
   };
 
-  handleSubmit = e => {
+  handleSave = e => {
     const name = e.target.value.trim().toLowerCase();
     if (name && e.which === 13) {
       this.props.handleAddCategory(name);
@@ -66,7 +66,7 @@ export default class Categories extends PureComponent {
             className="uk-input uk-form-width-small"
             type="text"
             onChange={this.handleChange}
-            onKeyDown={this.handleSubmit}
+            onKeyDown={this.handleSave}
             onBlur={this.handleBlur}
           />
         </div>

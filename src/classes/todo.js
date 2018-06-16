@@ -11,5 +11,5 @@ export default class Todo {
     else this.completed = false;
   }
 
-  editTodo() {}
+  editTodo() {} // TODO
 }
