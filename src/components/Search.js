@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// TODO handle internal state
-
 const Search = ({ handleSearch, filter }) => {
   return (
     <form className="uk-search uk-search-default">
