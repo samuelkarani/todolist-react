@@ -1,13 +1,13 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-export default class Categories extends React.Component {
+export default class Categories extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       name: ""
     };
-    this.input = React.createRef();
+    this.inputRef = React.createRef();
   }
 
   handleChange = e => {
@@ -64,8 +64,7 @@ export default class Categories extends React.Component {
                 onClick={this.handleClick}
               />
               <input
-                ref={this.input}
-                value={name}
+                ref={this.inputRef}
                 className="uk-input"
                 type="text"
                 onChange={this.handleChange}

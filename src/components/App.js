@@ -144,7 +144,6 @@ class App extends PureComponent {
           <div className="uk-container">
             <AppBar
               filter={filter}
-              showSearch={todos.length > SEARCH_SHOW}
               allCompleted={allCompleted}
               handleAdd={this.handleAdd}
               handleClearCompleted={this.handleClearCompleted}

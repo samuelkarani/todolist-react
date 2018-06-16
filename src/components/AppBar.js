@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Search from "./Search";
+
 const AppBar = ({
   allCompleted,
   handleToggleCompleteAll,
@@ -27,11 +28,9 @@ const AppBar = ({
       </div>
     </div>
 
-    {showSearch && (
-      <div>
-        <Search handleSearch={handleSearch} filter={filter} />
-      </div>
-    )}
+    <div>
+      <Search handleSearch={handleSearch} filter={filter} />
+    </div>
 
     <div>
       <button className="uk-button uk-button-default uk-form-small">
@@ -56,8 +55,7 @@ AppBar.propTypes = {
   handleToggleCompleteAll: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
-  showSearch: PropTypes.bool.isRequired
+  filter: PropTypes.string.isRequired
 };
 
 export default AppBar;
