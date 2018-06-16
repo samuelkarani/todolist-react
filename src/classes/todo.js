@@ -18,5 +18,7 @@ export default class Todo {
     this.categories = this.categories.slice();
   }
 
-  editTodo() {} // TODO
+  editTodo({ completed, title }) {
+    // TODO ?
+  }
 }

@@ -12,7 +12,7 @@ const Search = ({ handleSearch, handleClearSearch, filter }) => {
         className="uk-search-input uk-form-small uk-form-width-medium"
         type="search"
         placeholder="Search..."
-        onChange={e => handleSearch(e.target.value)}
+        onChange={e => handleSearch(e.target.value.trim().toLowerCase())}
         value={filter}
       />
       <button

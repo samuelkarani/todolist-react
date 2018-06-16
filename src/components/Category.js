@@ -9,7 +9,6 @@ export default class Category extends PureComponent {
       isEditing: false,
       name: props.category.name
     };
-
     this.inputRef = React.createRef();
   }
 
@@ -26,10 +25,15 @@ export default class Category extends PureComponent {
     });
   };
 
-  handleBlur = () => {
+  handleBlur = (e, id) => {
     this.setState({
       isEditing: false
     });
+    // attempted ref
+    this.props.handleEditCategory(
+      this.inputRef.current.value.trim().toLowerCase(),
+      id
+    );
     this.inputRef.current.blur();
   };
 
@@ -43,7 +47,11 @@ export default class Category extends PureComponent {
   };
 
   render() {
-    const { category, handleRemoveCategory } = this.props;
+    const {
+      category,
+      handleRemoveCategory,
+      handleSetCategoryFilter
+    } = this.props;
     const { isEditing, name } = this.state;
     return (
       <li key={category.id}>
@@ -55,11 +63,11 @@ export default class Category extends PureComponent {
             value={name}
             onChange={this.handleChange}
             onKeyDown={e => this.handleSave(e, category.id)}
-            onBlur={this.handleBlur}
+            onBlur={e => this.handleBlur(e, category.id)}
           />
         ) : (
-          <a className="uk-flex uk-flex-between">
-            <span>{name}</span>
+          <a className="uk-flex">
+            <span onClick={() => handleSetCategoryFilter(name)}>{name}</span>
             <span>
               <button
                 href=""
@@ -70,7 +78,7 @@ export default class Category extends PureComponent {
               <button
                 type="button"
                 uk-close=""
-                onClick={e => handleRemoveCategory(category.id)}
+                onClick={() => handleRemoveCategory(category.id)}
               />
             </span>
           </a>
@@ -83,5 +91,6 @@ export default class Category extends PureComponent {
 Category.propTypes = {
   handleEditCategory: PropTypes.func.isRequired,
   handleRemoveCategory: PropTypes.func.isRequired,
+  handleSetCategoryFilter: PropTypes.func.isRequired,
   category: PropTypes.instanceOf(CategoryClass)
 };

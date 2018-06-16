@@ -10,7 +10,9 @@ import Categories from "./Categories";
 function assignCategories(todoList, categories) {
   todoList.forEach(todo => {
     const randomIdx = Math.floor(Math.random() * categories.length);
-    categories[randomIdx].addTodo(todo);
+    const category = categories[randomIdx];
+    category.addTodo(todo);
+    todo.addCategory(category.name);
   });
   return todoList;
 }
@@ -49,7 +51,7 @@ class App extends PureComponent {
 
   handleSearch = phrase => {
     this.setState({
-      filter: phrase.toLowerCase()
+      filter: phrase
     });
   };
 
@@ -224,6 +226,8 @@ class App extends PureComponent {
                   handleAddCategory={this.handleAddCategory}
                   handleRemoveCategory={this.handleRemoveCategory}
                   handleEditCategory={this.handleEditCategory}
+                  handleSetCategoryFilter={this.handleSetCategoryFilter}
+                  handleRemoveCategoryFilter={this.handleRemoveCategoryFilter}
                 />
               </div>
               <div className="uk-width-expand" uk-filter="target: .js-filter">

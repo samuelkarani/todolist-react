@@ -12,20 +12,18 @@ const AppBar = ({
   filter
 }) => (
   <div className="uk-flex uk-flex-middle uk-flex-between">
-    <div className="uk-flex uk-flex-middle uk-grid">
-      <div>
-        <input
-          className="uk-checkbox"
-          type="checkbox"
-          checked={allCompleted}
-          onChange={handleToggleCompleteAll}
-          filter={filter}
-        />
-      </div>
+    <div>
+      <button uk-marker="" onClick={handleAdd} />
+    </div>
 
-      <div>
-        <button uk-marker="" onClick={handleAdd} />
-      </div>
+    <div>
+      <input
+        className="uk-checkbox"
+        type="checkbox"
+        checked={allCompleted}
+        onChange={handleToggleCompleteAll}
+        filter={filter}
+      />
     </div>
 
     <div>

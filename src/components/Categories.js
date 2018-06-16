@@ -45,12 +45,12 @@ export default class Categories extends PureComponent {
   };
 
   render() {
-    const { categories } = this.props;
+    const { categories, handleRemoveCategoryFilter } = this.props;
     return (
       <div>
         <ul className="uk-tab-right" uk-tab="">
           <li className="uk-active">
-            <a>All</a>
+            <a onClick={handleRemoveCategoryFilter}>All</a>
           </li>
           {categories.map(category => (
             <Category
@@ -58,6 +58,7 @@ export default class Categories extends PureComponent {
               category={category}
               handleEditCategory={this.props.handleEditCategory}
               handleRemoveCategory={this.props.handleRemoveCategory}
+              handleSetCategoryFilter={this.props.handleSetCategoryFilter}
             />
           ))}
         </ul>
@@ -87,5 +88,7 @@ Categories.propTypes = {
   handleAddCategory: PropTypes.func.isRequired,
   handleEditCategory: PropTypes.func.isRequired,
   handleRemoveCategory: PropTypes.func.isRequired,
+  handleSetCategoryFilter: PropTypes.func.isRequired,
+  handleRemoveCategoryFilter: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.instanceOf(CategoryClass)).isRequired
 };
