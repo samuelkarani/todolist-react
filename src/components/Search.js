@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Search = ({ handleSearch, filter }) => {
+const Search = ({ handleSearch, handleClearSearch, filter }) => {
   return (
     <form className="uk-search uk-search-default">
       <span uk-search-icon="" />
@@ -12,7 +12,11 @@ const Search = ({ handleSearch, filter }) => {
         onChange={e => handleSearch(e.target.value)}
         value={filter}
       />
-      <span className="uk-form-icon uk-form-icon-flip" uk-icon="icon: close" />
+      <button
+        className="uk-form-icon uk-form-icon-flip"
+        uk-icon="icon: close"
+        onClick={handleClearSearch}
+      />
     </form>
   );
 };

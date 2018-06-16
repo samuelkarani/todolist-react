@@ -24,7 +24,7 @@ const AppBar = ({
       </div>
 
       <div>
-        <button href="" uk-marker="" onClick={handleAdd} />
+        <button uk-marker="" onClick={handleAdd} />
       </div>
     </div>
 
