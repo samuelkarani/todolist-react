@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 import PropTypes from "prop-types";
-import Todo from "../classes/todo";
+import TodoClass from "../classes/todo";
 
 const TodoList = ({
   todoList,
@@ -33,7 +33,7 @@ const TodoList = ({
 );
 
 TodoList.propTypes = {
-  todoList: PropTypes.arrayOf(PropTypes.instanceOf(Todo))
+  todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass))
 };
 
 export default TodoList;

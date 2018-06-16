@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Category from "../classes/category";
+import CategoryClass from "../classes/category";
+import Category from "./Category";
 
 export default class Categories extends PureComponent {
   constructor(props) {
@@ -51,31 +52,7 @@ export default class Categories extends PureComponent {
           <li className="uk-active">
             <a>All</a>
           </li>
-          {categories.map(({ name, id }) => (
-            <li key={id}>
-              <a className="uk-flex uk-flex-between">
-                <span>{name}</span>
-                <input
-                  class="uk-input uk-form-blank uk-form-width-small"
-                  type="text"
-                  value={name}
-                  hidden={isEditing}
-                />
-
-                <button
-                  href=""
-                  className="uk-icon-link"
-                  uk-icon="pencil"
-                  onClick={handleEditCategory}
-                />
-                <button
-                  type="button"
-                  uk-close=""
-                  onClick={handleRemoveCategory}
-                />
-              </a>
-            </li>
-          ))}
+          {categories.map(({ name, id }) => <Category key={id} />)}
         </ul>
 
         <div className="uk-inline">
@@ -102,5 +79,5 @@ Categories.propTypes = {
   handleAddCategory: PropTypes.func.isRequired,
   handleEditCategory: PropTypes.func.isRequired,
   handleRemoveCategory: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.instanceOf(Category))
+  categories: PropTypes.arrayOf(PropTypes.instanceOf(CategoryClass))
 };
