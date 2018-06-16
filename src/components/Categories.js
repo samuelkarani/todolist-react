@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Category from "../classes/category";
 
 export default class Categories extends PureComponent {
   constructor(props) {
@@ -50,34 +51,36 @@ export default class Categories extends PureComponent {
           <li className="uk-active">
             <a>All</a>
           </li>
-          {categories.map((category, idx) => (
-            <li key={idx}>
-              <a>{category.name}</a>
+          {categories.map(({ name, id }) => (
+            <li key={id}>
+              <a>{name}</a>
             </li>
           ))}
-          <li>
-            <div className="uk-inline">
-              <button
-                className="uk-form-icon uk-form-icon-flip"
-                uk-icon="icon: plus"
-                onClick={this.handleClick}
-              />
-              <input
-                ref={this.inputRef}
-                className="uk-input"
-                type="text"
-                onChange={this.handleChange}
-                onKeyDown={this.handleSubmit}
-                onBlur={this.handleBlur}
-              />
-            </div>
-          </li>
         </ul>
+
+        <div className="uk-inline">
+          <button
+            className="uk-form-icon uk-form-icon-flip"
+            uk-icon="icon: plus"
+            onClick={this.handleClick}
+          />
+          <input
+            ref={this.inputRef}
+            className="uk-input uk-form-width-small"
+            type="text"
+            onChange={this.handleChange}
+            onKeyDown={this.handleSubmit}
+            onBlur={this.handleBlur}
+          />
+        </div>
       </div>
     );
   }
 }
 
 Categories.propTypes = {
-  handleAddCategory: PropTypes.func.isRequired
+  handleAddCategory: PropTypes.func.isRequired,
+  handleEditCategories: PropTypes.func.isRequired,
+  handleRemoveCategories: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.instanceOf(Category))
 };

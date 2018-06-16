@@ -1,8 +1,10 @@
 import Todo from "./todo";
+import { ID } from "../utils";
 export default class Category {
   constructor({ name }) {
     this.name = name;
     this.todoItems = [];
+    this.id = ID();
   }
 
   addTodo(todo) {

@@ -142,6 +142,33 @@ class App extends PureComponent {
     });
   };
 
+  handleRemoveCategory = id => {
+    this.setState(prevState => {
+      const categories = prevState.categories.filter(
+        category => category.id !== id
+      );
+      return {
+        categories
+      };
+    });
+  };
+
+  handleEditCategory = (name, id) => {
+    this.setState(prevState => {
+      const categories = prevState.categories.map(category => {
+        if (category.id === id) {
+          category.editName(name);
+          return category;
+        } else {
+          return category;
+        }
+      });
+      return {
+        categories
+      };
+    });
+  };
+
   handleFilter = () =>
     this.state.todoList.filter(todo => todo.title.includes(this.state.filter));
 
@@ -161,31 +188,35 @@ class App extends PureComponent {
               handleSearch={this.handleSearch}
             />
             <hr />
-            <div>
-              <Categories
-                categories={categories}
-                handleAddCategory={this.handleAddCategory}
-              />
-            </div>
-            <div uk-filter="target: .js-filter">
-              <ul className="uk-subnav uk-subnav-pill">
-                <li className="uk-active" uk-filter-control="">
-                  <a>All</a>
-                </li>
-                <li uk-filter-control="[data-status='active']">
-                  <a>Active</a>
-                </li>
-                <li uk-filter-control="[data-status='completed']">
-                  <a>Completed</a>
-                </li>
-              </ul>
-              <TodoList
-                todoList={todos}
-                handleToggleComplete={this.handleToggleComplete}
-                handleChangeTitle={this.handleChangeTitle}
-                handleRemove={this.handleRemove}
-                handleDuplicate={this.handleDuplicate}
-              />
+            <div className="uk-grid">
+              <div>
+                <Categories
+                  categories={categories}
+                  handleAddCategory={this.handleAddCategory}
+                  handleRemoveCategory={this.handleRemoveCategory}
+                  handleEditCategory={this.handleEditCategory}
+                />
+              </div>
+              <div className="uk-width-expand" uk-filter="target: .js-filter">
+                <ul className="uk-subnav uk-subnav-pill">
+                  <li className="uk-active" uk-filter-control="">
+                    <a>All</a>
+                  </li>
+                  <li uk-filter-control="[data-status='active']">
+                    <a>Active</a>
+                  </li>
+                  <li uk-filter-control="[data-status='completed']">
+                    <a>Completed</a>
+                  </li>
+                </ul>
+                <TodoList
+                  todoList={todos}
+                  handleToggleComplete={this.handleToggleComplete}
+                  handleChangeTitle={this.handleChangeTitle}
+                  handleRemove={this.handleRemove}
+                  handleDuplicate={this.handleDuplicate}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,8 @@
+import { ID } from "../utils";
 export default class Todo {
   constructor(props) {
     if (props && props.id) this.id = props.id;
-    else this.id = Date.now();
+    else this.id = ID();
 
     if (props && props.title) this.title = props.title;
     else this.title = "";
@@ -9,6 +10,5 @@ export default class Todo {
     if (props && props.completed) this.completed = props.completed;
     else this.completed = false;
   }
-
-  // TODO ? add instance methods?
+  // ?? instance methods ??
 }
