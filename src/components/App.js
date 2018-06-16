@@ -106,27 +106,19 @@ class App extends PureComponent {
     });
   };
 
-  handleChangeTitle = (title, id) => {
-    this.setState(prevState => {
-      const todoList = prevState.todoList.map(
-        todo => (todo.id === id ? Object.assign(todo, { title }) : todo)
-      );
-      return { todoList };
-    });
-  };
-
-  handleToggleComplete = (completed, id) => {
+  handleEditTodo = ({ completed, title, id }) => {
     this.setState(prevState => {
       const todoList = prevState.todoList.map(todo => {
         if (todo.id === id) {
-          return Object.assign(todo, { completed });
-        } else {
+          todo.editTodo({
+            completed,
+            title
+          });
           return todo;
         }
+        return todo;
       });
-      return {
-        todoList
-      };
+      return { todoList };
     });
   };
 
@@ -244,8 +236,7 @@ class App extends PureComponent {
                 </ul>
                 <TodoList
                   todoList={todoList}
-                  handleToggleComplete={this.handleToggleComplete}
-                  handleChangeTitle={this.handleChangeTitle}
+                  handleEditTodo={this.handleEditTodo}
                   handleRemove={this.handleRemove}
                   handleDuplicate={this.handleDuplicate}
                 />

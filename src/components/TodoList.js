@@ -5,8 +5,7 @@ import TodoClass from "../classes/todo";
 
 const TodoList = ({
   todoList,
-  handleToggleComplete,
-  handleChangeTitle,
+  handleEditTodo,
   handleDuplicate,
   handleRemove
 }) => (
@@ -22,8 +21,7 @@ const TodoList = ({
           id={todo.id.toString()}
           title={todo.title}
           completed={todo.completed}
-          handleToggleComplete={handleToggleComplete}
-          handleChangeTitle={handleChangeTitle}
+          handleEditTodo={handleEditTodo}
           handleRemove={handleRemove}
           handleDuplicate={handleDuplicate}
         />
@@ -33,7 +31,10 @@ const TodoList = ({
 );
 
 TodoList.propTypes = {
-  todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired
+  todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired,
+  handleEditTodo: PropTypes.func.isRequired,
+  handleDuplicate: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired
 };
 
 export default TodoList;

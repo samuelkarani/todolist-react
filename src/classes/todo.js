@@ -19,6 +19,12 @@ export default class Todo {
   }
 
   editTodo({ completed, title }) {
-    // TODO ?
+    if (typeof completed === "boolean") {
+      this.completed = completed;
+    }
+
+    if (typeof title === "string") {
+      this.title = title;
+    }
   }
 }

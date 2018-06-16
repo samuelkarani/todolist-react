@@ -6,8 +6,7 @@ const TodoItem = ({
   completed,
   title,
   status,
-  handleToggleComplete,
-  handleChangeTitle,
+  handleEditTodo,
   handleRemove,
   handleDuplicate
 }) => (
@@ -24,7 +23,7 @@ const TodoItem = ({
           className="uk-checkbox"
           type="checkbox"
           checked={completed}
-          onChange={e => handleToggleComplete(e.target.checked, id)}
+          onChange={e => handleEditTodo({ completed: e.target.checked, id })}
         />
       </div>
       <div className="uk-width-expand">
@@ -33,7 +32,7 @@ const TodoItem = ({
           type="text"
           name="title"
           value={title}
-          onChange={e => handleChangeTitle(e.target.value, id)}
+          onChange={e => handleEditTodo({ title: e.target.value, id })}
         />
       </div>
 
@@ -60,8 +59,7 @@ TodoItem.propTypes = {
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
-  handleToggleComplete: PropTypes.func.isRequired,
-  handleChangeTitle: PropTypes.func.isRequired,
+  handleEditTodo: PropTypes.func.isRequired,
   handleRemove: PropTypes.func.isRequired,
   handleDuplicate: PropTypes.func.isRequired
 };
