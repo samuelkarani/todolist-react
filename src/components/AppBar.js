@@ -8,6 +8,7 @@ const AppBar = ({
   handleClearCompleted,
   handleAdd,
   handleSearch,
+  handleClearSearch,
   filter
 }) => (
   <div className="uk-flex uk-flex-middle uk-flex-between">
@@ -28,7 +29,11 @@ const AppBar = ({
     </div>
 
     <div>
-      <Search handleSearch={handleSearch} filter={filter} />
+      <Search
+        handleSearch={handleSearch}
+        handleClearSearch={handleClearSearch}
+        filter={filter}
+      />
     </div>
 
     <div>
@@ -54,6 +59,7 @@ AppBar.propTypes = {
   handleToggleCompleteAll: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
+  handleClearSearch: PropTypes.func.isRequired,
   filter: PropTypes.string.isRequired
 };
 

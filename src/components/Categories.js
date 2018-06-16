@@ -52,12 +52,12 @@ export default class Categories extends PureComponent {
           <li className="uk-active">
             <a>All</a>
           </li>
-          {categories.map(({ name, id }) => (
+          {categories.map(category => (
             <Category
-              key={id}
+              key={category.id}
               category={category}
-              handleEditCategory={this.handleEditCategory}
-              handleRemoveCategory={this.handleRemoveCategory}
+              handleEditCategory={this.props.handleEditCategory}
+              handleRemoveCategory={this.props.handleRemoveCategory}
             />
           ))}
         </ul>

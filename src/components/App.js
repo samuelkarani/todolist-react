@@ -52,6 +52,10 @@ class App extends PureComponent {
     });
   };
 
+  handleClearSearch = () => {
+    this.setState({ filter: "" });
+  };
+
   handleClearCompleted = () => {
     this.setState(prevState => {
       const todoList = prevState.todoList.filter(
@@ -186,6 +190,7 @@ class App extends PureComponent {
               handleClearCompleted={this.handleClearCompleted}
               handleToggleCompleteAll={this.handleToggleCompleteAll}
               handleSearch={this.handleSearch}
+              handleClearSearch={this.handleClearSearch}
             />
             <hr />
             <div className="uk-grid">

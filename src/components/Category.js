@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
-import TodoClass from "../classes/todo";
+import CategoryClass from "../classes/category";
+import PropTypes from "prop-types";
 
 export default class Category extends PureComponent {
   state = {
@@ -29,19 +30,20 @@ export default class Category extends PureComponent {
 
   render() {
     const { category, handleRemoveCategory } = this.props;
+    const { isEditing } = this.state;
     return (
-      <li key={id}>
+      <li key={category.id}>
         {isEditing ? (
           <input
             class="uk-input uk-form-blank uk-form-width-small"
             type="text"
-            value={name}
+            value={category.name}
             onChange={this.handleChange}
             onKeyDown={this.handleSave}
           />
         ) : (
           <a className="uk-flex uk-flex-between">
-            <span>{name}</span>
+            <span>{category.name}</span>
             <button
               href=""
               className="uk-icon-link"
@@ -63,5 +65,5 @@ export default class Category extends PureComponent {
 Category.propTypes = {
   handleEditCategory: PropTypes.func.isRequired,
   handleRemoveCategory: PropTypes.func.isRequired,
-  category: PropTypes.instanceOf(TodoClass)
+  category: PropTypes.instanceOf(CategoryClass)
 };
