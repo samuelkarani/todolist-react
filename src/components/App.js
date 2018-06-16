@@ -178,7 +178,7 @@ class App extends PureComponent {
 
   render() {
     const { allCompleted, filter, categories } = this.state;
-    const todos = this.handleFilter();
+    const todoList = this.handleFilter();
     return (
       <div>
         <div className="uk-section uk-section-xsmall">
@@ -215,7 +215,7 @@ class App extends PureComponent {
                   </li>
                 </ul>
                 <TodoList
-                  todoList={todos}
+                  todoList={todoList}
                   handleToggleComplete={this.handleToggleComplete}
                   handleChangeTitle={this.handleChangeTitle}
                   handleRemove={this.handleRemove}

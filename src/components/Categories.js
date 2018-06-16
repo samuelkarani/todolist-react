@@ -68,6 +68,7 @@ export default class Categories extends PureComponent {
             uk-icon="icon: plus"
             onClick={this.handleClick}
           />
+
           <input
             ref={this.inputRef}
             className="uk-input uk-form-width-small"

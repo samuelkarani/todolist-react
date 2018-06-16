@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 
 export default class Category extends PureComponent {
   state = {
-    isEditing: false
+    isEditing: false,
+    name: this.props.category.name
   };
 
   handleEdit = () => {
@@ -19,9 +20,15 @@ export default class Category extends PureComponent {
     });
   };
 
-  handleSave = e => {
+  handleBlur = () => {
+    this.setState({
+      isEditing: false
+    });
+  };
+
+  handleSave = (e, id) => {
     if (e.which === 13) {
-      this.props.handleEditCategory(e.target.value.trim());
+      this.props.handleEditCategory(e.target.value.trim().toLowerCase(), id);
       this.setState({
         isEditing: false
       });
@@ -30,20 +37,21 @@ export default class Category extends PureComponent {
 
   render() {
     const { category, handleRemoveCategory } = this.props;
-    const { isEditing } = this.state;
+    const { isEditing, name } = this.state;
     return (
       <li key={category.id}>
         {isEditing ? (
           <input
-            class="uk-input uk-form-blank uk-form-width-small"
+            className="uk-input uk-form-blank uk-form-width-small"
             type="text"
-            value={category.name}
+            value={name}
             onChange={this.handleChange}
-            onKeyDown={this.handleSave}
+            onKeyDown={e => this.handleSave(e, category.id)}
+            onBlur={this.handleBlur}
           />
         ) : (
           <a className="uk-flex uk-flex-between">
-            <span>{category.name}</span>
+            <span>{name}</span>
             <span>
               <button
                 href=""

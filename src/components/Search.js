@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 
 const Search = ({ handleSearch, handleClearSearch, filter }) => {
   return (
-    <form className="uk-search uk-search-default">
+    <form
+      className="uk-search uk-search-default"
+      onSubmit={e => e.preventDefault()}
+    >
       <span uk-search-icon="" />
       <input
         className="uk-search-input"
