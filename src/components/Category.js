@@ -44,17 +44,19 @@ export default class Category extends PureComponent {
         ) : (
           <a className="uk-flex uk-flex-between">
             <span>{category.name}</span>
-            <button
-              href=""
-              className="uk-icon-link"
-              uk-icon="pencil"
-              onClick={this.handleEdit}
-            />
-            <button
-              type="button"
-              uk-close=""
-              onClick={e => handleRemoveCategory(category.id)}
-            />
+            <span>
+              <button
+                href=""
+                className="uk-icon-link"
+                uk-icon="pencil"
+                onClick={this.handleEdit}
+              />
+              <button
+                type="button"
+                uk-close=""
+                onClick={e => handleRemoveCategory(category.id)}
+              />
+            </span>
           </a>
         )}
       </li>

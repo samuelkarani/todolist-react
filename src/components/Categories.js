@@ -86,5 +86,5 @@ Categories.propTypes = {
   handleAddCategory: PropTypes.func.isRequired,
   handleEditCategory: PropTypes.func.isRequired,
   handleRemoveCategory: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.instanceOf(CategoryClass))
+  categories: PropTypes.arrayOf(PropTypes.instanceOf(CategoryClass)).isRequired
 };
