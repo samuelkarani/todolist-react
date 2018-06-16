@@ -16,7 +16,7 @@ export default class Category extends PureComponent {
     this.setState({
       isEditing: true
     });
-    this.inputRef.current.focus();
+    // this.inputRef.current.focus();
   };
 
   handleChange = e => {
@@ -34,7 +34,7 @@ export default class Category extends PureComponent {
       this.inputRef.current.value.trim().toLowerCase(),
       id
     );
-    this.inputRef.current.blur();
+    // this.inputRef.current.blur();
   };
 
   handleSave = (e, id) => {

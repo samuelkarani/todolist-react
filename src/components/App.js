@@ -184,7 +184,6 @@ class App extends PureComponent {
     let todoList = this.state.todoList;
     const filter = this.state.filter;
     if (filter) todoList = todoList.filter(todo => todo.title.includes(filter));
-
     const categoryFilter = this.state.categoryFilter;
     if (categoryFilter) {
       todoList = todoList.filter(todo =>
