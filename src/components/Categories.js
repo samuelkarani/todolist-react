@@ -45,14 +45,21 @@ export default class Categories extends PureComponent {
   };
 
   render() {
-    const { categories, handleRemoveCategory, handleEditCategory } = this.props;
+    const { categories } = this.props;
     return (
       <div>
         <ul className="uk-tab-right" uk-tab="">
           <li className="uk-active">
             <a>All</a>
           </li>
-          {categories.map(({ name, id }) => <Category key={id} />)}
+          {categories.map(({ name, id }) => (
+            <Category
+              key={id}
+              category={category}
+              handleEditCategory={this.handleEditCategory}
+              handleRemoveCategory={this.handleRemoveCategory}
+            />
+          ))}
         </ul>
 
         <div className="uk-inline">

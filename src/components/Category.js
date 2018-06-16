@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import TodoClass from "../classes/todo";
 
 export default class Category extends PureComponent {
   state = {
@@ -18,8 +19,14 @@ export default class Category extends PureComponent {
   };
 
   handleSave = e => {
-    this.props.handleEditCategory;
+    if (e.which === 13) {
+      this.props.handleEditCategory(e.target.value.trim());
+      this.setState({
+        isEditing: false
+      });
+    }
   };
+
   render() {
     const { category, handleRemoveCategory } = this.props;
     return (
@@ -29,6 +36,8 @@ export default class Category extends PureComponent {
             class="uk-input uk-form-blank uk-form-width-small"
             type="text"
             value={name}
+            onChange={this.handleChange}
+            onKeyDown={this.handleSave}
           />
         ) : (
           <a className="uk-flex uk-flex-between">
@@ -50,3 +59,9 @@ export default class Category extends PureComponent {
     );
   }
 }
+
+Category.propTypes = {
+  handleEditCategory: PropTypes.func.isRequired,
+  handleRemoveCategory: PropTypes.func.isRequired,
+  category: PropTypes.instanceOf(TodoClass)
+};
