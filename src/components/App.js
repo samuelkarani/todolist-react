@@ -24,6 +24,7 @@ class App extends PureComponent {
     todoList: [],
     allCompleted: false,
     filter: "",
+    categoryFilter: "",
     categories: [
       new Category({ name: "personal" }),
       new Category({ name: "work" })
@@ -54,6 +55,18 @@ class App extends PureComponent {
 
   handleClearSearch = () => {
     this.setState({ filter: "" });
+  };
+
+  handleSetCategoryFilter = name => {
+    this.setState({
+      categoryFilter: name
+    });
+  };
+
+  handleRemoveCategoryFilter = () => {
+    this.setState({
+      categoryFilter: ""
+    });
   };
 
   handleClearCompleted = () => {
@@ -173,8 +186,19 @@ class App extends PureComponent {
     });
   };
 
-  handleFilter = () =>
-    this.state.todoList.filter(todo => todo.title.includes(this.state.filter));
+  handleFilter = () => {
+    let todoList = this.state.todoList;
+    const filter = this.state.filter;
+    if (filter) todoList = todoList.filter(todo => todo.title.includes(filter));
+
+    const categoryFilter = this.state.categoryFilter;
+    if (categoryFilter) {
+      todoList = todoList.filter(todo =>
+        todo.categories.includes(categoryFilter)
+      );
+    }
+    return todoList;
+  };
 
   render() {
     const { allCompleted, filter, categories } = this.state;

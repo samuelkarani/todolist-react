@@ -9,6 +9,13 @@ export default class Todo {
 
     if (props && props.completed) this.completed = props.completed;
     else this.completed = false;
+
+    this.categories = [];
+  }
+
+  addCategory(name) {
+    this.categories.push(name);
+    this.categories = this.categories.slice();
   }
 
   editTodo() {} // TODO

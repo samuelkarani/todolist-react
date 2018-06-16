@@ -3,15 +3,21 @@ import CategoryClass from "../classes/category";
 import PropTypes from "prop-types";
 
 export default class Category extends PureComponent {
-  state = {
-    isEditing: false,
-    name: this.props.category.name
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+      name: props.category.name
+    };
 
-  handleEdit = () => {
+    this.inputRef = React.createRef();
+  }
+
+  handleClick = () => {
     this.setState({
       isEditing: true
     });
+    this.inputRef.current.focus();
   };
 
   handleChange = e => {
@@ -24,6 +30,7 @@ export default class Category extends PureComponent {
     this.setState({
       isEditing: false
     });
+    this.inputRef.current.blur();
   };
 
   handleSave = (e, id) => {
@@ -42,6 +49,7 @@ export default class Category extends PureComponent {
       <li key={category.id}>
         {isEditing ? (
           <input
+            ref={this.inputRef}
             className="uk-input uk-form-blank uk-form-width-small"
             type="text"
             value={name}
@@ -57,7 +65,7 @@ export default class Category extends PureComponent {
                 href=""
                 className="uk-icon-link"
                 uk-icon="pencil"
-                onClick={this.handleEdit}
+                onClick={this.handleClick}
               />
               <button
                 type="button"

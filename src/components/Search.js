@@ -9,7 +9,7 @@ const Search = ({ handleSearch, handleClearSearch, filter }) => {
     >
       <span uk-search-icon="" />
       <input
-        className="uk-search-input"
+        className="uk-search-input uk-form-small uk-form-width-medium"
         type="search"
         placeholder="Search..."
         onChange={e => handleSearch(e.target.value)}
