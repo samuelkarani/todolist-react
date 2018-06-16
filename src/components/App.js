@@ -7,8 +7,18 @@ import TodoList from "./TodoList";
 import AppBar from "./AppBar";
 import Categories from "./Categories";
 import FilterControls from "./FilterControls";
-import { SEARCH_SHOW } from "../constants";
-import { assignCategories } from "../utils";
+
+function assignCategories(todoList, categories) {
+  todoList.forEach(todo => {
+    const randomIdx = Math.floor(Math.random() * categories.length);
+    categories[randomIdx].addTodo(todo);
+  });
+  return todoList;
+}
+
+function isDuplicatePresent(categories, name) {
+  return categories.some(category => category.name == name);
+}
 
 class App extends PureComponent {
   state = {
@@ -121,11 +131,12 @@ class App extends PureComponent {
   handleAddCategory = name => {
     this.setState(prevState => {
       const categories = prevState.categories;
-      categories.push(
-        new Category({
-          name
-        })
-      );
+      if (!isDuplicatePresent(categories, name))
+        categories.push(
+          new Category({
+            name
+          })
+        );
       return {
         categories: categories.slice()
       };
