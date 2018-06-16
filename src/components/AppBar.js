@@ -8,7 +8,6 @@ const AppBar = ({
   handleClearCompleted,
   handleAdd,
   handleSearch,
-  showSearch,
   filter
 }) => (
   <div className="uk-flex uk-flex-middle uk-flex-between">

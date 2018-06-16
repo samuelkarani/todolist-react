@@ -6,7 +6,6 @@ import Category from "../classes/category";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
 import Categories from "./Categories";
-import FilterControls from "./FilterControls";
 
 function assignCategories(todoList, categories) {
   todoList.forEach(todo => {
@@ -169,7 +168,17 @@ class App extends PureComponent {
               />
             </div>
             <div uk-filter="target: .js-filter">
-              <FilterControls />
+              <ul className="uk-subnav uk-subnav-pill">
+                <li className="uk-active" uk-filter-control="">
+                  <a>All</a>
+                </li>
+                <li uk-filter-control="[data-status='active']">
+                  <a>Active</a>
+                </li>
+                <li uk-filter-control="[data-status='completed']">
+                  <a>Completed</a>
+                </li>
+              </ul>
               <TodoList
                 todoList={todos}
                 handleToggleComplete={this.handleToggleComplete}
