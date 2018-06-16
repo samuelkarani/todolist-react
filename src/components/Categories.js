@@ -27,7 +27,7 @@ export default class Categories extends PureComponent {
   };
 
   handleClick = () => {
-    const name = this.state.name.trim().toLowerCase();
+    const name = this.inputRef.current.value.trim().toLowerCase();
     if (name) {
       this.props.handleAddCategory(name);
       this.setState({
@@ -44,7 +44,6 @@ export default class Categories extends PureComponent {
 
   render() {
     const { categories } = this.props;
-    const { name } = this.state;
     return (
       <div>
         <ul className="uk-tab-right" uk-tab="">

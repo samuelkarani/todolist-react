@@ -16,7 +16,7 @@ function assignCategories(todoList, categories) {
 }
 
 function isDuplicatePresent(categories, name) {
-  return categories.some(category => category.name == name);
+  return categories.some(category => category.name === name);
 }
 
 class App extends PureComponent {
@@ -30,7 +30,7 @@ class App extends PureComponent {
     ]
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
       .then(res => res.data)
@@ -44,7 +44,7 @@ class App extends PureComponent {
       .catch(() => {
         console.error("could not fetch todoList");
       });
-  };
+  }
 
   handleSearch = phrase => {
     this.setState({
