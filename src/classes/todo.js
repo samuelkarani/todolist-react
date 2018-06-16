@@ -1,4 +1,5 @@
 import { ID } from "../utils";
+import Category from "./category";
 export default class Todo {
   constructor(props) {
     if (props && props.id) this.id = props.id;
@@ -16,6 +17,12 @@ export default class Todo {
   addCategory(name) {
     this.categories.push(name);
     this.categories = this.categories.slice();
+  }
+
+  removeCategory(name) {
+    this.categories = this.categories.filter(
+      categoryName => categoryName !== name
+    );
   }
 
   editTodo({ completed, title }) {
