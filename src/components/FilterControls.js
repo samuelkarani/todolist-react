@@ -1,6 +1,6 @@
 import React from "react";
 
-export function FilterControls() {
+export default function FilterControls() {
   return (
     <ul className="uk-subnav uk-subnav-pill">
       <li className="uk-active" uk-filter-control="">

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import TodoItem from "./TodoItem";
 import PropTypes from "prop-types";
-import Todo from "./classes/todo";
+import Todo from "../classes/todo";
 
 export default class TodoList extends PureComponent {
   render() {

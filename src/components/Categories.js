@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export class Categories extends React.Component {
+export default class Categories extends React.Component {
   state = {
     name: ""
   };
@@ -21,6 +21,7 @@ export class Categories extends React.Component {
 
   render() {
     const { categories } = this.props;
+    const { name } = this.state;
     return (
       <div>
         <ul className="uk-tab-right" uk-tab="">
@@ -41,7 +42,7 @@ export class Categories extends React.Component {
                 onClick={this.handleSubmit}
               />
               <input
-                value={category}
+                value={name}
                 placeholder="category"
                 className="uk-input"
                 type="text"
@@ -58,6 +59,5 @@ export class Categories extends React.Component {
 }
 
 Categories.propTypes = {
-  categories: PropTypes.array.isRequired,
   handleAddCategory: PropTypes.func.isRequired
 };

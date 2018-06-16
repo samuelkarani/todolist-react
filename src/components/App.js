@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
-import "./App.css";
-import Todo from "./classes/todo";
-import Category from "./classes/category";
+import "../styles/app.css";
+import Todo from "../classes/todo";
+import Category from "../classes/category";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
-import { Categories, FilterControls } from "./FilterControls";
+import Categories from "./Categories";
+import FilterControls from "./FilterControls";
 
 const SEARCH_SHOW = 10;
 
