@@ -3,7 +3,13 @@ import TodoItem from "./TodoItem";
 import PropTypes from "prop-types";
 import Todo from "../classes/todo";
 
-const TodoList = ({ todoList }) => (
+const TodoList = ({
+  todoList,
+  handleToggleComplete,
+  handleChangeTitle,
+  handleDuplicate,
+  handleRemove
+}) => (
   <div>
     <ul
       className="uk-list uk-list-divider js-filter"
@@ -16,10 +22,10 @@ const TodoList = ({ todoList }) => (
           id={todo.id}
           title={todo.title}
           completed={todo.completed}
-          handleToggleComplete={this.props.handleToggleComplete}
-          handleChangeTitle={this.props.handleChangeTitle}
-          handleRemove={this.props.handleRemove}
-          handleDuplicate={this.props.handleDuplicate}
+          handleToggleComplete={handleToggleComplete}
+          handleChangeTitle={handleChangeTitle}
+          handleRemove={handleRemove}
+          handleDuplicate={handleDuplicate}
         />
       ))}
     </ul>

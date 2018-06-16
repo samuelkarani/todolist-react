@@ -2,9 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default class Categories extends React.Component {
-  state = {
-    name: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: ""
+    };
+    this.input = React.createRef();
+  }
 
   handleChange = e => {
     this.setState({
@@ -13,11 +17,30 @@ export default class Categories extends React.Component {
   };
 
   handleSubmit = e => {
-    const name = e.target.value.trim();
-    this.props.handleAddCategory();
+    const name = e.target.value.trim().toLowerCase();
+    if (name && e.which === 13) {
+      this.props.handleAddCategory(name);
+      this.setState({
+        name: ""
+      });
+    }
   };
 
-  handleBlur = () => {};
+  handleClick = () => {
+    const name = this.state.name.trim().toLowerCase();
+    if (name) {
+      this.props.handleAddCategory(name);
+      this.setState({
+        name: ""
+      });
+    }
+  };
+
+  handleBlur = () => {
+    this.setState({
+      name: ""
+    });
+  };
 
   render() {
     const { categories } = this.props;
@@ -35,15 +58,14 @@ export default class Categories extends React.Component {
           ))}
           <li>
             <div className="uk-inline">
-              <a
+              <button
                 className="uk-form-icon uk-form-icon-flip"
-                href="#"
                 uk-icon="icon: plus"
-                onClick={this.handleSubmit}
+                onClick={this.handleClick}
               />
               <input
+                ref={this.input}
                 value={name}
-                placeholder="category"
                 className="uk-input"
                 type="text"
                 onChange={this.handleChange}

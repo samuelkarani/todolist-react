@@ -7,16 +7,9 @@ import TodoList from "./TodoList";
 import AppBar from "./AppBar";
 import Categories from "./Categories";
 import FilterControls from "./FilterControls";
+import { SEARCH_SHOW } from "../constants";
+import { assignCategories } from "../utils";
 
-const SEARCH_SHOW = 10;
-
-const assignCategories = (todoList, categories) => {
-  todoList.forEach(todo => {
-    const randomIdx = Math.floor(Math.random() * categories.length);
-    categories[randomIdx].addTodo(todo);
-  });
-  return todoList;
-};
 class App extends PureComponent {
   state = {
     todoList: [],
