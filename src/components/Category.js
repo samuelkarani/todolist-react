@@ -78,7 +78,7 @@ export default class Category extends PureComponent {
               <button
                 type="button"
                 uk-close=""
-                onClick={() => handleRemoveCategory(category.id)}
+                onClick={() => handleRemoveCategory(category.name)}
               />
             </span>
           </a>

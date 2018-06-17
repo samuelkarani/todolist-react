@@ -1,5 +1,4 @@
 import { ID } from "../utils";
-import Category from "./category";
 export default class Todo {
   constructor(props) {
     if (props && props.id) this.id = props.id;
@@ -14,6 +13,16 @@ export default class Todo {
     this.categories = [];
   }
 
+  editTodo({ completed, title }) {
+    if (typeof completed === "boolean") {
+      this.completed = completed;
+    }
+
+    if (typeof title === "string") {
+      this.title = title;
+    }
+  }
+
   addCategory(name) {
     this.categories.push(name);
     this.categories = this.categories.slice();
@@ -25,13 +34,7 @@ export default class Todo {
     );
   }
 
-  editTodo({ completed, title }) {
-    if (typeof completed === "boolean") {
-      this.completed = completed;
-    }
-
-    if (typeof title === "string") {
-      this.title = title;
-    }
+  containsCategory(name) {
+    return this.categories.includes(name);
   }
 }

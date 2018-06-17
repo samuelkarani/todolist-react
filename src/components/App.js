@@ -91,7 +91,7 @@ class App extends PureComponent {
     });
   };
 
-  handleAdd = () => {
+  handleAddTodo = () => {
     this.setState(prevState => {
       const todoList = prevState.todoList.slice();
       todoList.unshift(new Todo());
@@ -99,7 +99,7 @@ class App extends PureComponent {
     });
   };
 
-  handleRemove = id => {
+  handleRemoveTodo = id => {
     this.setState(prevState => {
       const todoList = prevState.todoList.filter(todo => todo.id !== id);
       return { todoList };
@@ -122,7 +122,7 @@ class App extends PureComponent {
     });
   };
 
-  handleDuplicate = id => {
+  handleDuplicateTodo = id => {
     this.setState(prevState => {
       const todoList = prevState.todoList;
       const idx = todoList.findIndex(todo => todo.id === id);
@@ -153,13 +153,23 @@ class App extends PureComponent {
     });
   };
 
-  handleRemoveCategory = id => {
+  handleRemoveCategory = name => {
     this.setState(prevState => {
       const categories = prevState.categories.filter(
-        category => category.id !== id
+        category => category.name !== name
       );
+
+      const todoList = prevState.todoList.map(todo => {
+        if (todo.containsCategory(name)) {
+          todo.removeCategory(name);
+          return todo;
+        } else {
+          return todo;
+        }
+      });
       return {
-        categories
+        categories,
+        todoList
       };
     });
   };
@@ -203,7 +213,7 @@ class App extends PureComponent {
             <AppBar
               filter={filter}
               allCompleted={allCompleted}
-              handleAdd={this.handleAdd}
+              handleAdd={this.handleAddTodo}
               handleClearCompleted={this.handleClearCompleted}
               handleToggleCompleteAll={this.handleToggleCompleteAll}
               handleSearch={this.handleSearch}
@@ -236,8 +246,8 @@ class App extends PureComponent {
                 <TodoList
                   todoList={todoList}
                   handleEditTodo={this.handleEditTodo}
-                  handleRemove={this.handleRemove}
-                  handleDuplicate={this.handleDuplicate}
+                  handleRemoveTodo={this.handleRemoveTodo}
+                  handleDuplicateTodo={this.handleDuplicateTodo}
                 />
               </div>
             </div>

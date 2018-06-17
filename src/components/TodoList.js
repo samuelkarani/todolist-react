@@ -6,8 +6,8 @@ import TodoClass from "../classes/todo";
 const TodoList = ({
   todoList,
   handleEditTodo,
-  handleDuplicate,
-  handleRemove
+  handleDuplicateTodo,
+  handleRemoveTodo
 }) => (
   <div>
     <ul
@@ -22,8 +22,8 @@ const TodoList = ({
           title={todo.title}
           completed={todo.completed}
           handleEditTodo={handleEditTodo}
-          handleRemove={handleRemove}
-          handleDuplicate={handleDuplicate}
+          handleRemoveTodo={handleRemoveTodo}
+          handleDuplicateTodo={handleDuplicateTodo}
         />
       ))}
     </ul>
@@ -33,8 +33,8 @@ const TodoList = ({
 TodoList.propTypes = {
   todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired,
   handleEditTodo: PropTypes.func.isRequired,
-  handleDuplicate: PropTypes.func.isRequired,
-  handleRemove: PropTypes.func.isRequired
+  handleDuplicateTodo: PropTypes.func.isRequired,
+  handleRemoveTodo: PropTypes.func.isRequired
 };
 
 export default TodoList;

@@ -7,8 +7,8 @@ const TodoItem = ({
   title,
   status,
   handleEditTodo,
-  handleRemove,
-  handleDuplicate
+  handleRemoveTodo,
+  handleDuplicateTodo
 }) => (
   <li data-status={status}>
     <div className="uk-flex uk-flex-middle uk-grid">
@@ -40,14 +40,14 @@ const TodoItem = ({
         <button
           className="uk-icon-link"
           uk-icon="copy"
-          onClick={() => handleDuplicate(id)}
+          onClick={() => handleDuplicateTodo(id)}
         />
       </div>
       <div>
         <button
           className="uk-icon-link"
           uk-icon="close"
-          onClick={() => handleRemove(id)}
+          onClick={() => handleRemoveTodo(id)}
         />
       </div>
     </div>
@@ -60,8 +60,8 @@ TodoItem.propTypes = {
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   handleEditTodo: PropTypes.func.isRequired,
-  handleRemove: PropTypes.func.isRequired,
-  handleDuplicate: PropTypes.func.isRequired
+  handleRemoveTodo: PropTypes.func.isRequired,
+  handleDuplicateTodo: PropTypes.func.isRequired
 };
 
 export default TodoItem;
