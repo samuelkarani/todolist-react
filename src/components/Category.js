@@ -20,12 +20,12 @@ export default class Category extends PureComponent {
 
   handleChange = e => {
     this.setState({
-      name: e.target.value
+      name: e.target.value.trim().toLowerCase()
     });
   };
 
   handleBlur = (e, id) => {
-    const name = e.target.value.trim().toLowerCase();
+    const { name } = this.state;
     if (name) {
       if (!this.props.handleEditCategory(name, id))
         this.setState({
@@ -38,9 +38,13 @@ export default class Category extends PureComponent {
   };
 
   handleSave = (e, id) => {
-    const name = e.target.value.trim().toLowerCase();
+    const { name } = this.state;
     if (name && e.which === 13) {
-      this.props.handleEditCategory(name, id);
+      if (!this.props.handleEditCategory(name, id)) {
+        this.setState({
+          name: this.props.category.name
+        });
+      }
       this.setState({
         isEditing: false
       });

@@ -191,7 +191,7 @@ class App extends PureComponent {
         });
       }
       return {
-        categories
+        categories: categories.slice()
       };
     });
     return bool;

@@ -18,7 +18,7 @@ export default class Categories extends PureComponent {
   };
 
   handleSave = e => {
-    const name = e.target.value.trim().toLowerCase();
+    const { name } = this.state;
     if (name && e.which === 13) {
       if (this.props.handleAddCategory(name))
         this.setState({
@@ -28,7 +28,7 @@ export default class Categories extends PureComponent {
   };
 
   handleClick = () => {
-    const name = this.state.name;
+    const { name } = this.state;
     if (name) {
       if (this.props.handleAddCategory(name))
         this.setState({
