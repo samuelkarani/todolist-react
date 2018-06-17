@@ -48,7 +48,8 @@ class App extends PureComponent {
     categories: [
       new Category({ name: "personal" }),
       new Category({ name: "work" })
-    ]
+    ],
+    createdOrUpdatedCategory: false
   };
 
   componentDidMount() {
@@ -158,29 +159,29 @@ class App extends PureComponent {
   };
 
   handleAddCategory = name => {
-    let bool;
     this.setState(prevState => {
-      const categories = prevState.categories;
-      bool = isDuplicatePresent(categories, name);
-      if (!bool)
+      let categories = prevState.categories;
+      const createdOrUpdatedCategory = isDuplicatePresent(categories, name);
+      if (!createdOrUpdatedCategory) {
         categories.push(
           new Category({
             name
           })
         );
+        categories = categories.slice();
+      }
       return {
-        categories: categories.slice()
+        createdOrUpdatedCategory,
+        categories
       };
     });
-    return bool;
   };
 
   handleEditCategory = (name, id) => {
-    let bool;
     this.setState(prevState => {
       let categories = prevState.categories;
-      bool = isDuplicatePresent(categories, name);
-      if (!bool) {
+      const createdOrUpdatedCategory = isDuplicatePresent(categories, name);
+      if (!createdOrUpdatedCategory) {
         categories = categories.map(category => {
           if (category.id === id) {
             category.editName(name);
@@ -191,10 +192,10 @@ class App extends PureComponent {
         });
       }
       return {
-        categories: categories.slice()
+        createdOrUpdatedCategory,
+        categories
       };
     });
-    return bool;
   };
 
   handleRemoveCategory = name => {
@@ -226,7 +227,12 @@ class App extends PureComponent {
   };
 
   render() {
-    const { allCompleted, filter, categories } = this.state;
+    const {
+      allCompleted,
+      filter,
+      categories,
+      createdOrUpdatedCategory
+    } = this.state;
     const todoList = this.handleFilter();
     return (
       <div>
@@ -251,6 +257,7 @@ class App extends PureComponent {
                   handleEditCategory={this.handleEditCategory}
                   handleSetCategoryFilter={this.handleSetCategoryFilter}
                   handleRemoveCategoryFilter={this.handleRemoveCategoryFilter}
+                  createdOrUpdatedCategory={createdOrUpdatedCategory}
                 />
               </div>
               <div className="uk-width-expand" uk-filter="target: .js-filter">

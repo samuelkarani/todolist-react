@@ -4,36 +4,21 @@ import CategoryClass from "../classes/category";
 import Category from "./Category";
 
 export default class Categories extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: ""
-    };
-  }
+  state = {
+    name: ""
+  };
 
   handleChange = e => {
+    const name = e.target.value.trim().toLowerCase();
     this.setState({
-      name: e.target.value.trim().toLowerCase()
+      name
     });
   };
 
-  handleSave = e => {
+  handleKeyDown = e => {
     const { name } = this.state;
     if (name && e.which === 13) {
-      if (this.props.handleAddCategory(name))
-        this.setState({
-          name: ""
-        });
-    }
-  };
-
-  handleClick = () => {
-    const { name } = this.state;
-    if (name) {
-      if (this.props.handleAddCategory(name))
-        this.setState({
-          name: ""
-        });
+      this.props.handleAddCategory(name);
     }
   };
 
@@ -42,6 +27,23 @@ export default class Categories extends PureComponent {
       name: ""
     });
   };
+
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.createdOrUpdatedCategory) {
+  //     return {
+  //       name: ""
+  //     };
+  //   }
+  //   return null;
+  // }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.createdOrUpdatedCategory) {
+      this.setState({
+        name: ""
+      });
+    }
+  }
 
   render() {
     const { categories, handleRemoveCategoryFilter } = this.props;
@@ -62,18 +64,12 @@ export default class Categories extends PureComponent {
           ))}
         </ul>
 
-        <div className="uk-inline">
-          <a
-            className="uk-form-icon uk-form-icon-flip"
-            uk-icon="icon: plus"
-            onClick={this.handleClick}
-          />
-
+        <div>
           <input
             className="uk-input uk-form-width-small"
             type="text"
             onChange={this.handleChange}
-            onKeyDown={this.handleSave}
+            onKeyDown={this.handleKeyDown}
             onBlur={this.handleBlur}
             value={this.state.name}
           />
@@ -89,5 +85,6 @@ Categories.propTypes = {
   handleRemoveCategory: PropTypes.func.isRequired,
   handleSetCategoryFilter: PropTypes.func.isRequired,
   handleRemoveCategoryFilter: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.instanceOf(CategoryClass)).isRequired
+  categories: PropTypes.arrayOf(PropTypes.instanceOf(CategoryClass)).isRequired,
+  createdOrUpdatedCategory: PropTypes.bool.isRequired
 };

@@ -3,13 +3,10 @@ import CategoryClass from "../classes/category";
 import PropTypes from "prop-types";
 
 export default class Category extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isEditing: false,
-      name: props.category.name
-    };
-  }
+  state = {
+    isEditing: false,
+    name: this.props.category.name
+  };
 
   handleClick = () => {
     this.props.handleSetCategoryFilter(this.state.name);
@@ -37,7 +34,7 @@ export default class Category extends PureComponent {
     });
   };
 
-  handleSave = (e, id) => {
+  handleKeyDown = (e, id) => {
     const { name } = this.state;
     if (name && e.which === 13) {
       if (!this.props.handleEditCategory(name, id)) {
@@ -66,7 +63,7 @@ export default class Category extends PureComponent {
             type="text"
             value={name}
             onChange={this.handleChange}
-            onKeyDown={e => this.handleSave(e, category.id)}
+            onKeyDown={e => this.handleKeyDown(e, category.id)}
             onBlur={e => this.handleBlur(e, category.id)}
             autoFocus
           />
