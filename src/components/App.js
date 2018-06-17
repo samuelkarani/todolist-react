@@ -21,6 +21,24 @@ function isDuplicatePresent(categories, name) {
   return categories.some(category => category.name === name);
 }
 
+function convertIdsToStrings(todoList) {
+  return todoList.map(todo => {
+    todo.id = todo.id.toString();
+    return todo;
+  });
+}
+
+function removeCategoryFromTodoList(todoList, name) {
+  return todoList.map(todo => {
+    if (todo.containsCategory(name)) {
+      todo.removeCategory(name);
+      return todo;
+    } else {
+      return todo;
+    }
+  });
+}
+
 class App extends PureComponent {
   state = {
     todoList: [],
@@ -37,6 +55,7 @@ class App extends PureComponent {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
       .then(res => res.data)
+      .then(todoList => convertIdsToStrings(todoList))
       .then(todoList =>
         todoList.map(
           ({ title, completed, id }) => new Todo({ title, completed, id })
@@ -139,9 +158,11 @@ class App extends PureComponent {
   };
 
   handleAddCategory = name => {
+    let bool;
     this.setState(prevState => {
       const categories = prevState.categories;
-      if (!isDuplicatePresent(categories, name))
+      bool = isDuplicatePresent(categories, name);
+      if (!bool)
         categories.push(
           new Category({
             name
@@ -151,41 +172,41 @@ class App extends PureComponent {
         categories: categories.slice()
       };
     });
+    return bool;
+  };
+
+  handleEditCategory = (name, id) => {
+    let bool;
+    this.setState(prevState => {
+      let categories = prevState.categories;
+      bool = isDuplicatePresent(categories, name);
+      if (!bool) {
+        categories = categories.map(category => {
+          if (category.id === id) {
+            category.editName(name);
+            return category;
+          } else {
+            return category;
+          }
+        });
+      }
+      return {
+        categories
+      };
+    });
+    return bool;
   };
 
   handleRemoveCategory = name => {
+    this.handleRemoveCategoryFilter();
     this.setState(prevState => {
       const categories = prevState.categories.filter(
         category => category.name !== name
       );
-
-      const todoList = prevState.todoList.map(todo => {
-        if (todo.containsCategory(name)) {
-          todo.removeCategory(name);
-          return todo;
-        } else {
-          return todo;
-        }
-      });
+      const todoList = removeCategoryFromTodoList(prevState.todoList, name);
       return {
         categories,
         todoList
-      };
-    });
-  };
-
-  handleEditCategory = (name, id) => {
-    this.setState(prevState => {
-      const categories = prevState.categories.map(category => {
-        if (category.id === id) {
-          category.editName(name);
-          return category;
-        } else {
-          return category;
-        }
-      });
-      return {
-        categories
       };
     });
   };
@@ -195,6 +216,7 @@ class App extends PureComponent {
     const filter = this.state.filter;
     if (filter) todoList = todoList.filter(todo => todo.title.includes(filter));
     const categoryFilter = this.state.categoryFilter;
+
     if (categoryFilter) {
       todoList = todoList.filter(todo =>
         todo.categories.includes(categoryFilter)

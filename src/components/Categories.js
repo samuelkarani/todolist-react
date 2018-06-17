@@ -9,32 +9,31 @@ export default class Categories extends PureComponent {
     this.state = {
       name: ""
     };
-    this.inputRef = React.createRef();
   }
 
   handleChange = e => {
     this.setState({
-      name: e.target.value
+      name: e.target.value.trim().toLowerCase()
     });
   };
 
   handleSave = e => {
     const name = e.target.value.trim().toLowerCase();
     if (name && e.which === 13) {
-      this.props.handleAddCategory(name);
-      this.setState({
-        name: ""
-      });
+      if (this.props.handleAddCategory(name))
+        this.setState({
+          name: ""
+        });
     }
   };
 
   handleClick = () => {
-    const name = this.inputRef.current.value.trim().toLowerCase();
+    const name = this.state.name;
     if (name) {
-      this.props.handleAddCategory(name);
-      this.setState({
-        name: ""
-      });
+      if (this.props.handleAddCategory(name))
+        this.setState({
+          name: ""
+        });
     }
   };
 
@@ -64,19 +63,19 @@ export default class Categories extends PureComponent {
         </ul>
 
         <div className="uk-inline">
-          <button
+          <a
             className="uk-form-icon uk-form-icon-flip"
             uk-icon="icon: plus"
             onClick={this.handleClick}
           />
 
           <input
-            ref={this.inputRef}
             className="uk-input uk-form-width-small"
             type="text"
             onChange={this.handleChange}
             onKeyDown={this.handleSave}
             onBlur={this.handleBlur}
+            value={this.state.name}
           />
         </div>
       </div>

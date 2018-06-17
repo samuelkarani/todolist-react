@@ -9,14 +9,13 @@ export default class Category extends PureComponent {
       isEditing: false,
       name: props.category.name
     };
-    this.inputRef = React.createRef();
   }
 
   handleClick = () => {
+    this.props.handleSetCategoryFilter(this.state.name);
     this.setState({
       isEditing: true
     });
-    // this.inputRef.current.focus();
   };
 
   handleChange = e => {
@@ -26,20 +25,22 @@ export default class Category extends PureComponent {
   };
 
   handleBlur = (e, id) => {
+    const name = e.target.value.trim().toLowerCase();
+    if (name) {
+      if (!this.props.handleEditCategory(name, id))
+        this.setState({
+          name: this.props.category.name
+        });
+    }
     this.setState({
       isEditing: false
     });
-    // attempted ref
-    this.props.handleEditCategory(
-      this.inputRef.current.value.trim().toLowerCase(),
-      id
-    );
-    // this.inputRef.current.blur();
   };
 
   handleSave = (e, id) => {
-    if (e.which === 13) {
-      this.props.handleEditCategory(e.target.value.trim().toLowerCase(), id);
+    const name = e.target.value.trim().toLowerCase();
+    if (name && e.which === 13) {
+      this.props.handleEditCategory(name, id);
       this.setState({
         isEditing: false
       });
@@ -57,13 +58,13 @@ export default class Category extends PureComponent {
       <li key={category.id}>
         {isEditing ? (
           <input
-            ref={this.inputRef}
             className="uk-input uk-form-blank uk-form-width-small"
             type="text"
             value={name}
             onChange={this.handleChange}
             onKeyDown={e => this.handleSave(e, category.id)}
             onBlur={e => this.handleBlur(e, category.id)}
+            autoFocus
           />
         ) : (
           <a className="uk-flex">
