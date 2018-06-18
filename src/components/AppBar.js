@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import Search from "./Search";
 
 const AppBar = ({
-  allCompleted,
-  handleToggleCompleteAll,
   handleClearCompleted,
   handleAdd,
   handleSearch,
@@ -12,18 +10,14 @@ const AppBar = ({
   filter
 }) => (
   <div className="uk-flex uk-flex-middle uk-flex-between">
-    <div>
-      <button uk-marker="" onClick={handleAdd} />
-    </div>
+    <div className="uk-grid uk-grid-small">
+      <div>
+        <button uk-marker="" onClick={handleAdd} />
+      </div>
 
-    <div>
-      <input
-        className="uk-checkbox"
-        type="checkbox"
-        checked={allCompleted}
-        onChange={handleToggleCompleteAll}
-        filter={filter}
-      />
+      <div>
+        <span className="uk-text-meta uk-text-uppercase">add</span>
+      </div>
     </div>
 
     <div>
@@ -46,9 +40,7 @@ const AppBar = ({
 );
 
 AppBar.propTypes = {
-  allCompleted: PropTypes.bool.isRequired,
   handleClearCompleted: PropTypes.func.isRequired,
-  handleToggleCompleteAll: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
   handleClearSearch: PropTypes.func.isRequired,

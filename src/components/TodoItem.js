@@ -71,12 +71,6 @@ const TodoItem = class extends PureComponent {
       <li data-status={status}>
         <div className="uk-flex uk-flex-middle uk-grid">
           <div>
-            <span
-              className="uk-sortable-handle uk-margin-small-right"
-              uk-icon="icon: table"
-            />
-          </div>
-          <div>
             <input
               className="uk-checkbox"
               type="checkbox"
@@ -84,6 +78,12 @@ const TodoItem = class extends PureComponent {
               onChange={e =>
                 handleEditTodo({ completed: e.target.checked, id })
               }
+            />
+          </div>
+          <div>
+            <span
+              className="uk-sortable-handle uk-margin-small-right"
+              uk-icon="icon: table"
             />
           </div>
           <div className="uk-width-expand">

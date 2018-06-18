@@ -39,7 +39,7 @@ export default class App extends PureComponent {
       const todoList = prevState.todoList.filter(
         todo => todo.completed !== true
       );
-      return { todoList };
+      return { todoList, allCompleted: false };
     });
   };
 
@@ -114,17 +114,24 @@ export default class App extends PureComponent {
   };
 
   handleFilter = () => {
-    let todoList = this.state.todoList;
+    let filteredTodoList = this.state.todoList;
     const { filter, status } = this.state;
-    if (filter) todoList = todoList.filter(todo => todo.title.includes(filter));
-    const itemsLeft = computeTodoLeft(todoList);
+    if (filter)
+      filteredTodoList = filteredTodoList.filter(todo =>
+        todo.title.includes(filter)
+      );
+    const itemsLeft = computeTodoLeft(filteredTodoList);
     if (status === "active")
-      todoList = todoList.filter(todo => todo.completed === false);
+      filteredTodoList = filteredTodoList.filter(
+        todo => todo.completed === false
+      );
     if (status === "completed")
-      todoList = todoList.filter(todo => todo.completed === true);
+      filteredTodoList = filteredTodoList.filter(
+        todo => todo.completed === true
+      );
 
     return {
-      todoList,
+      filteredTodoList,
       itemsLeft
     };
   };
@@ -157,8 +164,8 @@ export default class App extends PureComponent {
   }
 
   render() {
-    const { allCompleted, filter, status } = this.state;
-    const { todoList, itemsLeft } = this.handleFilter();
+    const { allCompleted, filter, status, todoList } = this.state;
+    const { filteredTodoList, itemsLeft } = this.handleFilter();
 
     return (
       <div>
@@ -178,7 +185,25 @@ export default class App extends PureComponent {
             <div className="uk-grid">
               {todoList.length > 0 && (
                 <div className="uk-width-expand" uk-filter="target: .js-filter">
-                  <div className="uk-flex uk-flex-between uk-grid">
+                  <div className="uk-grid uk-child-width-1-3@s uk-flex-middle">
+                    <div className="uk-grid uk-grid-small">
+                      <div>
+                        <input
+                          className="uk-checkbox"
+                          type="checkbox"
+                          checked={allCompleted}
+                          onChange={this.handleToggleCompleteAll}
+                          filter={filter}
+                        />
+                      </div>
+
+                      <div>
+                        <span className="uk-text-margin-small-left uk-text-meta uk-text-uppercase">
+                          toggle complete all
+                        </span>
+                      </div>
+                    </div>
+
                     <ul className="uk-subnav uk-subnav-pill">
                       <li
                         onClick={() => this.handleChangeStatus("all")}
@@ -202,13 +227,15 @@ export default class App extends PureComponent {
                         <a>Completed</a>
                       </li>
                     </ul>
-                    <div>
+
+                    <div className="uk-text-right">
                       <p className="uk-text-meta uk-text-small">{`
                     ${itemsLeft} item${itemsLeft > 1 ? "s" : ""} left`}</p>
                     </div>
                   </div>
+                  <hr />
                   <TodoList
-                    todoList={todoList}
+                    todoList={filteredTodoList}
                     handleEditTodo={this.handleEditTodo}
                     handleRemoveTodo={this.handleRemoveTodo}
                     handleDuplicateTodo={this.handleDuplicateTodo}
