@@ -15,7 +15,7 @@ const Search = ({ handleSearch, handleClearSearch, filter }) => {
         onChange={e => handleSearch(e.target.value.toLowerCase())}
         value={filter}
       />
-      <button
+      <a
         className="uk-form-icon uk-form-icon-flip"
         uk-icon="icon: close"
         onClick={handleClearSearch}

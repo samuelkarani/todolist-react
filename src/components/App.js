@@ -12,6 +12,10 @@ function convertIdsToStrings(todoList) {
   });
 }
 
+function computeTodoLeft(todoList) {
+  return todoList.reduce((prev, todo) => prev + (!todo.completed ? 1 : 0), 0);
+}
+
 class App extends PureComponent {
   state = {
     todoList: [],
@@ -53,6 +57,9 @@ class App extends PureComponent {
     this.setState(prevState => {
       const todoList = prevState.todoList.slice();
       todoList.unshift(new Todo());
+
+      if (prevState.filter) {
+      }
       return { todoList };
     });
   };
@@ -100,7 +107,11 @@ class App extends PureComponent {
     let todoList = this.state.todoList;
     const filter = this.state.filter;
     if (filter) todoList = todoList.filter(todo => todo.title.includes(filter));
-    return todoList;
+    const itemsLeft = computeTodoLeft(todoList);
+    return {
+      todoList,
+      itemsLeft
+    };
   };
 
   componentDidMount() {
@@ -110,8 +121,7 @@ class App extends PureComponent {
       .then(todoList => convertIdsToStrings(todoList))
       .then(todoList =>
         todoList.map(
-          ({ title, completed, id }) =>
-            new Todo({ title, completed: false, id })
+          ({ title, completed, id }) => new Todo({ title, completed, id })
         )
       )
       .then(todoList => this.setState({ todoList }))
@@ -134,14 +144,8 @@ class App extends PureComponent {
   }
 
   render() {
-    const {
-      allCompleted,
-      filter,
-      categories,
-      createdCategory,
-      updatedCategory
-    } = this.state;
-    const todoList = this.handleFilter();
+    const { allCompleted, filter } = this.state;
+    const { todoList, itemsLeft } = this.handleFilter();
 
     return (
       <div>
@@ -155,21 +159,28 @@ class App extends PureComponent {
               handleToggleCompleteAll={this.handleToggleCompleteAll}
               handleSearch={this.handleSearch}
               handleClearSearch={this.handleClearSearch}
+              itemsLeft={itemsLeft}
             />
             <hr />
             <div className="uk-grid">
               <div className="uk-width-expand" uk-filter="target: .js-filter">
-                <ul className="uk-subnav uk-subnav-pill">
-                  <li className="uk-active" uk-filter-control="">
-                    <a>All</a>
-                  </li>
-                  <li uk-filter-control="[data-status='active']">
-                    <a>Active</a>
-                  </li>
-                  <li uk-filter-control="[data-status='completed']">
-                    <a>Completed</a>
-                  </li>
-                </ul>
+                <div className="uk-flex uk-flex-between uk-grid">
+                  <ul className="uk-subnav uk-subnav-pill">
+                    <li className="uk-active" uk-filter-control="">
+                      <a>All</a>
+                    </li>
+                    <li uk-filter-control="[data-status='active']">
+                      <a>Active</a>
+                    </li>
+                    <li uk-filter-control="[data-status='completed']">
+                      <a>Completed</a>
+                    </li>
+                  </ul>
+                  <div>
+                    <p className="uk-text-meta uk-text-small">{`
+                    ${itemsLeft} item${itemsLeft > 1 ? "s" : ""} left`}</p>
+                  </div>
+                </div>
                 <TodoList
                   todoList={todoList}
                   handleEditTodo={this.handleEditTodo}
