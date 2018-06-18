@@ -21,8 +21,7 @@ export default class App extends PureComponent {
     todoList: [],
     allCompleted: false,
     filter: "",
-    status: "all",
-    focusFirstTodo: false
+    status: "all"
   };
 
   handleSearch = phrase => {
@@ -71,7 +70,6 @@ export default class App extends PureComponent {
         updates = Object.assign(updates, { filter: "" });
       }
       updates = Object.assign(updates, { status: "all" });
-      updates = Object.assign(updates, { focusFirstTodo: true });
       return updates;
     });
   };
@@ -149,15 +147,12 @@ export default class App extends PureComponent {
       if (this.state.updatedCategory === true) {
         Object.assign(updates, { updatedCategory: false });
       }
-      if (this.state.createdCategory || this.state.updatedCategory) {
-        Object.assign(updates, { focusFirstTodo: false });
-      }
       this.setState(updates);
     }
   }
 
   render() {
-    const { allCompleted, filter, status, focusFirstTodo } = this.state;
+    const { allCompleted, filter, status } = this.state;
     const { todoList, itemsLeft } = this.handleFilter();
 
     return (
@@ -212,7 +207,6 @@ export default class App extends PureComponent {
                     handleEditTodo={this.handleEditTodo}
                     handleRemoveTodo={this.handleRemoveTodo}
                     handleDuplicateTodo={this.handleDuplicateTodo}
-                    focusFirstTodo={focusFirstTodo}
                   />
                 </div>
               )}

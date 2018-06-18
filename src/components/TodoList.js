@@ -25,7 +25,6 @@ const TodoList = ({
           handleEditTodo={handleEditTodo}
           handleRemoveTodo={handleRemoveTodo}
           handleDuplicateTodo={handleDuplicateTodo}
-          focusFirstTodo={focusFirstTodo && idx === 0 ? true : false}
         />
       ))}
     </ul>
@@ -36,8 +35,7 @@ TodoList.propTypes = {
   todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired,
   handleEditTodo: PropTypes.func.isRequired,
   handleDuplicateTodo: PropTypes.func.isRequired,
-  handleRemoveTodo: PropTypes.func.isRequired,
-  focusFirstTodo: PropTypes.bool.isRequired
+  handleRemoveTodo: PropTypes.func.isRequired
 };
 
 export default TodoList;
