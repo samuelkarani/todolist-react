@@ -37,18 +37,11 @@ export default class Categories extends PureComponent {
     });
   };
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.createdCategory) {
-      return {
-        name: ""
-      };
-    }
-    return null;
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    // OPTIMIZE could check for false -> true of createdCategory and remove getDerivedStateFromProps
-    if (!this.state.name) {
+    if (!prevProps.createdCategory && this.props.createdCategory) {
+      this.setState({
+        name: ""
+      });
       this.blurInput();
     }
   }
