@@ -2,24 +2,8 @@ import React, { PureComponent } from "react";
 import axios from "axios";
 import "../styles/app.css";
 import Todo from "../classes/todo";
-import Category from "../classes/category";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
-import Categories from "./Categories";
-
-function assignCategories(todoList, categories) {
-  todoList.forEach(todo => {
-    const randomIdx = Math.floor(Math.random() * categories.length);
-    const category = categories[randomIdx];
-    category.addTodo(todo);
-    todo.addCategory(category.name);
-  });
-  return todoList;
-}
-
-function noDuplicatePresent(categories, name) {
-  return name !== "all" && !categories.some(category => category.name === name);
-}
 
 function convertIdsToStrings(todoList) {
   return todoList.map(todo => {
@@ -28,29 +12,11 @@ function convertIdsToStrings(todoList) {
   });
 }
 
-function removeCategoryFromTodoList(todoList, name) {
-  return todoList.map(todo => {
-    if (todo.containsCategory(name)) {
-      todo.removeCategory(name);
-      return todo;
-    } else {
-      return todo;
-    }
-  });
-}
-
 class App extends PureComponent {
   state = {
     todoList: [],
     allCompleted: false,
-    filter: "",
-    categoryFilter: "",
-    categories: [
-      new Category({ name: "personal" }),
-      new Category({ name: "work" })
-    ],
-    createdCategory: false,
-    updatedCategory: false
+    filter: ""
   };
 
   handleSearch = phrase => {
@@ -61,18 +27,6 @@ class App extends PureComponent {
 
   handleClearSearch = () => {
     this.setState({ filter: "" });
-  };
-
-  handleSetCategoryFilter = name => {
-    this.setState({
-      categoryFilter: name
-    });
-  };
-
-  handleRemoveCategoryFilter = () => {
-    this.setState({
-      categoryFilter: ""
-    });
   };
 
   handleClearCompleted = () => {
@@ -142,71 +96,10 @@ class App extends PureComponent {
     });
   };
 
-  handleAddCategory = name => {
-    this.setState(prevState => {
-      let categories = prevState.categories;
-      const createdCategory = noDuplicatePresent(categories, name);
-      if (createdCategory) {
-        categories.push(
-          new Category({
-            name
-          })
-        );
-        categories = categories.slice();
-      }
-      return {
-        createdCategory,
-        categories
-      };
-    });
-  };
-
-  handleEditCategory = (name, id) => {
-    this.setState(prevState => {
-      let categories = prevState.categories;
-      const updatedCategory = noDuplicatePresent(categories, name);
-      if (updatedCategory) {
-        categories = categories.map(category => {
-          if (category.id === id) {
-            category.editName(name);
-            return category;
-          } else {
-            return category;
-          }
-        });
-      }
-      return {
-        updatedCategory,
-        categories
-      };
-    });
-  };
-
-  handleRemoveCategory = name => {
-    this.handleRemoveCategoryFilter();
-    this.setState(prevState => {
-      const categories = prevState.categories.filter(
-        category => category.name !== name
-      );
-      const todoList = removeCategoryFromTodoList(prevState.todoList, name);
-      return {
-        categories,
-        todoList
-      };
-    });
-  };
-
   handleFilter = () => {
     let todoList = this.state.todoList;
     const filter = this.state.filter;
     if (filter) todoList = todoList.filter(todo => todo.title.includes(filter));
-    const categoryFilter = this.state.categoryFilter;
-
-    if (categoryFilter) {
-      todoList = todoList.filter(todo =>
-        todo.categories.includes(categoryFilter)
-      );
-    }
     return todoList;
   };
 
@@ -217,10 +110,10 @@ class App extends PureComponent {
       .then(todoList => convertIdsToStrings(todoList))
       .then(todoList =>
         todoList.map(
-          ({ title, completed, id }) => new Todo({ title, completed, id })
+          ({ title, completed, id }) =>
+            new Todo({ title, completed: false, id })
         )
       )
-      .then(todoList => assignCategories(todoList, this.state.categories))
       .then(todoList => this.setState({ todoList }))
       .catch(() => {
         console.error("could not fetch todoList");
@@ -249,6 +142,7 @@ class App extends PureComponent {
       updatedCategory
     } = this.state;
     const todoList = this.handleFilter();
+
     return (
       <div>
         <div className="uk-section uk-section-xsmall">
@@ -264,18 +158,6 @@ class App extends PureComponent {
             />
             <hr />
             <div className="uk-grid">
-              <div>
-                <Categories
-                  categories={categories}
-                  handleAddCategory={this.handleAddCategory}
-                  handleRemoveCategory={this.handleRemoveCategory}
-                  handleEditCategory={this.handleEditCategory}
-                  handleSetCategoryFilter={this.handleSetCategoryFilter}
-                  handleRemoveCategoryFilter={this.handleRemoveCategoryFilter}
-                  createdCategory={createdCategory}
-                  updatedCategory={updatedCategory}
-                />
-              </div>
               <div className="uk-width-expand" uk-filter="target: .js-filter">
                 <ul className="uk-subnav uk-subnav-pill">
                   <li className="uk-active" uk-filter-control="">

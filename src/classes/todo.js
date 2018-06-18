@@ -9,8 +9,6 @@ export default class Todo {
 
     if (props && props.completed) this.completed = props.completed;
     else this.completed = false;
-
-    this.categories = [];
   }
 
   editTodo({ completed, title }) {
@@ -21,20 +19,5 @@ export default class Todo {
     if (typeof title === "string") {
       this.title = title;
     }
-  }
-
-  addCategory(name) {
-    this.categories.push(name);
-    this.categories = this.categories.slice();
-  }
-
-  removeCategory(name) {
-    this.categories = this.categories.filter(
-      categoryName => categoryName !== name
-    );
-  }
-
-  containsCategory(name) {
-    return this.categories.includes(name);
   }
 }
