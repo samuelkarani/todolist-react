@@ -170,7 +170,7 @@ export default class App extends PureComponent {
             <hr />
             <div className="uk-grid">
               {todoList.length > 0 && (
-                <div className="uk-width-expand" uk-filter="target: .js-filter">
+                <div className="uk-width-expand">
                   <Header
                     allCompleted={allCompleted}
                     handleToggleCompleteAll={this.handleToggleCompleteAll}

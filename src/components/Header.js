@@ -31,21 +31,18 @@ const Header = ({
         <li
           onClick={() => handleChangeStatus("all")}
           className={status === "all" ? "uk-active" : ""}
-          uk-filter-control=""
         >
           <a>All</a>
         </li>
         <li
           onClick={() => handleChangeStatus("active")}
           className={status === "active" ? "uk-active" : ""}
-          uk-filter-control="[data-status='active']"
         >
           <a>Active</a>
         </li>
         <li
           onClick={() => handleChangeStatus("completed")}
           className={status === "completed" ? "uk-active" : ""}
-          uk-filter-control="[data-status='completed']"
         >
           <a>Completed</a>
         </li>
