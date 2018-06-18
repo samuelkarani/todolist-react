@@ -17,7 +17,6 @@ const TodoList = ({
     >
       {todoList.map((todo, idx) => (
         <TodoItem
-          status={todo.completed ? "completed" : "active"}
           key={todo.id}
           id={todo.id.toString()}
           title={todo.title}

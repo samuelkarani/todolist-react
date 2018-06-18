@@ -4,6 +4,7 @@ import "../styles/app.css";
 import Todo from "../classes/todo";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
+import Header from "./Header";
 
 function convertIdsToStrings(todoList) {
   return todoList.map(todo => {
@@ -129,7 +130,6 @@ export default class App extends PureComponent {
       filteredTodoList = filteredTodoList.filter(
         todo => todo.completed === true
       );
-
     return {
       filteredTodoList,
       itemsLeft
@@ -152,17 +152,6 @@ export default class App extends PureComponent {
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    let updates = {};
-    if (this.state.createdCategory === true) {
-      Object.assign(updates, { createdCategory: false });
-      if (this.state.updatedCategory === true) {
-        Object.assign(updates, { updatedCategory: false });
-      }
-      this.setState(updates);
-    }
-  }
-
   render() {
     const { allCompleted, filter, status, todoList } = this.state;
     const { filteredTodoList, itemsLeft } = this.handleFilter();
@@ -173,66 +162,22 @@ export default class App extends PureComponent {
           <div className="uk-container">
             <AppBar
               filter={filter}
-              allCompleted={allCompleted}
               handleAdd={this.handleAddTodo}
               handleClearCompleted={this.handleClearCompleted}
-              handleToggleCompleteAll={this.handleToggleCompleteAll}
               handleSearch={this.handleSearch}
               handleClearSearch={this.handleClearSearch}
-              itemsLeft={itemsLeft}
             />
             <hr />
             <div className="uk-grid">
               {todoList.length > 0 && (
                 <div className="uk-width-expand" uk-filter="target: .js-filter">
-                  <div className="uk-grid uk-child-width-1-3@s uk-flex-middle">
-                    <div className="uk-grid uk-grid-small">
-                      <div>
-                        <input
-                          className="uk-checkbox"
-                          type="checkbox"
-                          checked={allCompleted}
-                          onChange={this.handleToggleCompleteAll}
-                          filter={filter}
-                        />
-                      </div>
-
-                      <div>
-                        <span className="uk-text-margin-small-left uk-text-meta uk-text-uppercase">
-                          toggle complete all
-                        </span>
-                      </div>
-                    </div>
-
-                    <ul className="uk-subnav uk-subnav-pill">
-                      <li
-                        onClick={() => this.handleChangeStatus("all")}
-                        className={status === "all" ? "uk-active" : ""}
-                        uk-filter-control=""
-                      >
-                        <a>All</a>
-                      </li>
-                      <li
-                        onClick={() => this.handleChangeStatus("active")}
-                        className={status === "active" ? "uk-active" : ""}
-                        uk-filter-control="[data-status='active']"
-                      >
-                        <a>Active</a>
-                      </li>
-                      <li
-                        onClick={() => this.handleChangeStatus("completed")}
-                        className={status === "completed" ? "uk-active" : ""}
-                        uk-filter-control="[data-status='completed']"
-                      >
-                        <a>Completed</a>
-                      </li>
-                    </ul>
-
-                    <div className="uk-text-right">
-                      <p className="uk-text-meta uk-text-small">{`
-                    ${itemsLeft} item${itemsLeft > 1 ? "s" : ""} left`}</p>
-                    </div>
-                  </div>
+                  <Header
+                    allCompleted={allCompleted}
+                    handleToggleCompleteAll={this.handleToggleCompleteAll}
+                    handleChangeStatus={this.handleChangeStatus}
+                    itemsLeft={itemsLeft}
+                    status={status}
+                  />
                   <hr />
                   <TodoList
                     todoList={filteredTodoList}

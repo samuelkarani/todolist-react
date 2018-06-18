@@ -59,7 +59,6 @@ const TodoItem = class extends PureComponent {
     const {
       id,
       completed,
-      status,
       handleEditTodo,
       handleRemoveTodo,
       handleDuplicateTodo
@@ -68,7 +67,7 @@ const TodoItem = class extends PureComponent {
     const { title } = this.state;
 
     return (
-      <li data-status={status}>
+      <li>
         <div className="uk-flex uk-flex-middle uk-grid">
           <div>
             <input
@@ -123,7 +122,6 @@ TodoItem.propTypes = {
   id: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
   handleEditTodo: PropTypes.func.isRequired,
   handleRemoveTodo: PropTypes.func.isRequired,
   handleDuplicateTodo: PropTypes.func.isRequired
