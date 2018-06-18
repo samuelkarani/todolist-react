@@ -22,7 +22,7 @@ const Header = ({
 
         <div>
           <span className="uk-text-margin-small-left uk-text-meta uk-text-uppercase">
-            toggle complete all
+            toggle
           </span>
         </div>
       </div>
