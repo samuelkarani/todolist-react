@@ -1,15 +1,28 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, createRef } from "react";
 import PropTypes from "prop-types";
 import CategoryClass from "../classes/category";
 import Category from "./Category";
 
 export default class Categories extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.inputRef = createRef();
+  }
+
   state = {
     name: ""
   };
 
-  handleChange = e => {
-    const name = e.target.value.trim().toLowerCase();
+  focusInput() {
+    this.inputRef.current.focus();
+  }
+
+  blurInput() {
+    this.inputRef.current.blur();
+  }
+
+  handleChange = () => {
+    const name = this.inputRef.current.value.trim().toLowerCase();
     this.setState({
       name
     });
@@ -28,25 +41,24 @@ export default class Categories extends PureComponent {
     });
   };
 
-  // static getDerivedStateFromProps(props, state) {
-  //   if (props.createdOrUpdatedCategory) {
-  //     return {
-  //       name: ""
-  //     };
-  //   }
-  //   return null;
-  // }
+  static getDerivedStateFromProps(props, state) {
+    if (props.createdOrUpdatedCategory) {
+      return {
+        name: ""
+      };
+    }
+    return null;
+  }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.createdOrUpdatedCategory) {
-      this.setState({
-        name: ""
-      });
+    if (!this.state.name) {
+      this.blurInput();
     }
   }
 
   render() {
     const { categories, handleRemoveCategoryFilter } = this.props;
+    const { createdOrUpdatedCategory } = this.state;
     return (
       <div>
         <ul className="uk-tab-right" uk-tab="">
@@ -66,6 +78,7 @@ export default class Categories extends PureComponent {
 
         <div>
           <input
+            ref={this.inputRef}
             className="uk-input uk-form-width-small"
             type="text"
             onChange={this.handleChange}

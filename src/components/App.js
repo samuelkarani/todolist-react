@@ -17,8 +17,8 @@ function assignCategories(todoList, categories) {
   return todoList;
 }
 
-function isDuplicatePresent(categories, name) {
-  return categories.some(category => category.name === name);
+function noDuplicatePresent(categories, name) {
+  return !categories.some(category => category.name === name);
 }
 
 function convertIdsToStrings(todoList) {
@@ -51,23 +51,6 @@ class App extends PureComponent {
     ],
     createdOrUpdatedCategory: false
   };
-
-  componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos")
-      .then(res => res.data)
-      .then(todoList => convertIdsToStrings(todoList))
-      .then(todoList =>
-        todoList.map(
-          ({ title, completed, id }) => new Todo({ title, completed, id })
-        )
-      )
-      .then(todoList => assignCategories(todoList, this.state.categories))
-      .then(todoList => this.setState({ todoList }))
-      .catch(() => {
-        console.error("could not fetch todoList");
-      });
-  }
 
   handleSearch = phrase => {
     this.setState({
@@ -161,8 +144,8 @@ class App extends PureComponent {
   handleAddCategory = name => {
     this.setState(prevState => {
       let categories = prevState.categories;
-      const createdOrUpdatedCategory = isDuplicatePresent(categories, name);
-      if (!createdOrUpdatedCategory) {
+      const createdOrUpdatedCategory = noDuplicatePresent(categories, name);
+      if (createdOrUpdatedCategory) {
         categories.push(
           new Category({
             name
@@ -180,8 +163,8 @@ class App extends PureComponent {
   handleEditCategory = (name, id) => {
     this.setState(prevState => {
       let categories = prevState.categories;
-      const createdOrUpdatedCategory = isDuplicatePresent(categories, name);
-      if (!createdOrUpdatedCategory) {
+      const createdOrUpdatedCategory = noDuplicatePresent(categories, name);
+      if (createdOrUpdatedCategory) {
         categories = categories.map(category => {
           if (category.id === id) {
             category.editName(name);
@@ -225,6 +208,31 @@ class App extends PureComponent {
     }
     return todoList;
   };
+
+  componentDidMount() {
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos")
+      .then(res => res.data)
+      .then(todoList => convertIdsToStrings(todoList))
+      .then(todoList =>
+        todoList.map(
+          ({ title, completed, id }) => new Todo({ title, completed, id })
+        )
+      )
+      .then(todoList => assignCategories(todoList, this.state.categories))
+      .then(todoList => this.setState({ todoList }))
+      .catch(() => {
+        console.error("could not fetch todoList");
+      });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.createdOrUpdatedCategory === true) {
+      this.setState({
+        createdOrUpdatedCategory: false
+      });
+    }
+  }
 
   render() {
     const {
