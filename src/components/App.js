@@ -18,7 +18,7 @@ function assignCategories(todoList, categories) {
 }
 
 function noDuplicatePresent(categories, name) {
-  return !categories.some(category => category.name === name);
+  return name !== "all" && !categories.some(category => category.name === name);
 }
 
 function convertIdsToStrings(todoList) {
@@ -49,7 +49,8 @@ class App extends PureComponent {
       new Category({ name: "personal" }),
       new Category({ name: "work" })
     ],
-    createdOrUpdatedCategory: false
+    createdCategory: false,
+    updatedCategory: false
   };
 
   handleSearch = phrase => {
@@ -144,8 +145,8 @@ class App extends PureComponent {
   handleAddCategory = name => {
     this.setState(prevState => {
       let categories = prevState.categories;
-      const createdOrUpdatedCategory = noDuplicatePresent(categories, name);
-      if (createdOrUpdatedCategory) {
+      const createdCategory = noDuplicatePresent(categories, name);
+      if (createdCategory) {
         categories.push(
           new Category({
             name
@@ -154,7 +155,7 @@ class App extends PureComponent {
         categories = categories.slice();
       }
       return {
-        createdOrUpdatedCategory,
+        createdCategory,
         categories
       };
     });
@@ -163,8 +164,8 @@ class App extends PureComponent {
   handleEditCategory = (name, id) => {
     this.setState(prevState => {
       let categories = prevState.categories;
-      const createdOrUpdatedCategory = noDuplicatePresent(categories, name);
-      if (createdOrUpdatedCategory) {
+      const updatedCategory = noDuplicatePresent(categories, name);
+      if (updatedCategory) {
         categories = categories.map(category => {
           if (category.id === id) {
             category.editName(name);
@@ -175,7 +176,7 @@ class App extends PureComponent {
         });
       }
       return {
-        createdOrUpdatedCategory,
+        updatedCategory,
         categories
       };
     });
@@ -227,10 +228,15 @@ class App extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.createdOrUpdatedCategory === true) {
+    if (this.state.createdCategory === true) {
       this.setState({
-        createdOrUpdatedCategory: false
+        createdCategory: false
       });
+      if (this.state.updatedCategory === true) {
+        this.setState({
+          updatedCategory: false
+        });
+      }
     }
   }
 
@@ -239,7 +245,8 @@ class App extends PureComponent {
       allCompleted,
       filter,
       categories,
-      createdOrUpdatedCategory
+      createdCategory,
+      updatedCategory
     } = this.state;
     const todoList = this.handleFilter();
     return (
@@ -265,7 +272,8 @@ class App extends PureComponent {
                   handleEditCategory={this.handleEditCategory}
                   handleSetCategoryFilter={this.handleSetCategoryFilter}
                   handleRemoveCategoryFilter={this.handleRemoveCategoryFilter}
-                  createdOrUpdatedCategory={createdOrUpdatedCategory}
+                  createdCategory={createdCategory}
+                  updatedCategory={updatedCategory}
                 />
               </div>
               <div className="uk-width-expand" uk-filter="target: .js-filter">

@@ -21,32 +21,46 @@ export default class Category extends PureComponent {
     });
   };
 
-  handleBlur = (e, id) => {
-    const { name } = this.state;
-    if (name) {
-      if (!this.props.handleEditCategory(name, id))
-        this.setState({
-          name: this.props.category.name
-        });
-    }
+  handleBlur = (_, id) => {
     this.setState({
       isEditing: false
     });
+    const { name } = this.state;
+    if (name) {
+      this.props.handleEditCategory(name);
+    } else {
+      this.setState({
+        name: this.props.category.name
+      });
+    }
   };
 
   handleKeyDown = (e, id) => {
-    const { name } = this.state;
-    if (name && e.which === 13) {
-      if (!this.props.handleEditCategory(name, id)) {
+    const { name } = this.state.name;
+    if (e.which === 13) {
+      this.setState({
+        isEditing: false
+      });
+      if (name) {
+        this.props.handleEditCategory(name);
+      } else {
         this.setState({
           name: this.props.category.name
         });
       }
-      this.setState({
-        isEditing: false
-      });
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    // handles duplicate update failures
+    if (!this.state.isEditing && prevState.isEditing) {
+      if (!this.props.updatedCategory) {
+        this.setState({
+          name: prevProps.category.name
+        });
+      }
+    }
+  }
 
   render() {
     const {
@@ -94,5 +108,6 @@ Category.propTypes = {
   handleEditCategory: PropTypes.func.isRequired,
   handleRemoveCategory: PropTypes.func.isRequired,
   handleSetCategoryFilter: PropTypes.func.isRequired,
-  category: PropTypes.instanceOf(CategoryClass)
+  category: PropTypes.instanceOf(CategoryClass),
+  updatedCategory: PropTypes.bool.isRequired
 };

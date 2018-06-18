@@ -13,10 +13,6 @@ export default class Categories extends PureComponent {
     name: ""
   };
 
-  focusInput() {
-    this.inputRef.current.focus();
-  }
-
   blurInput() {
     this.inputRef.current.blur();
   }
@@ -42,7 +38,7 @@ export default class Categories extends PureComponent {
   };
 
   static getDerivedStateFromProps(props, state) {
-    if (props.createdOrUpdatedCategory) {
+    if (props.createdCategory) {
       return {
         name: ""
       };
@@ -51,14 +47,18 @@ export default class Categories extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // OPTIMIZE could check for false -> true of createdCategory and remove getDerivedStateFromProps
     if (!this.state.name) {
       this.blurInput();
     }
   }
 
   render() {
-    const { categories, handleRemoveCategoryFilter } = this.props;
-    const { createdOrUpdatedCategory } = this.state;
+    const {
+      categories,
+      handleRemoveCategoryFilter,
+      updatedCategory
+    } = this.props;
     return (
       <div>
         <ul className="uk-tab-right" uk-tab="">
@@ -72,6 +72,7 @@ export default class Categories extends PureComponent {
               handleEditCategory={this.props.handleEditCategory}
               handleRemoveCategory={this.props.handleRemoveCategory}
               handleSetCategoryFilter={this.props.handleSetCategoryFilter}
+              updatedCategory={updatedCategory}
             />
           ))}
         </ul>
@@ -99,5 +100,6 @@ Categories.propTypes = {
   handleSetCategoryFilter: PropTypes.func.isRequired,
   handleRemoveCategoryFilter: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.instanceOf(CategoryClass)).isRequired,
-  createdOrUpdatedCategory: PropTypes.bool.isRequired
+  createdCategory: PropTypes.bool.isRequired,
+  updatedCategory: PropTypes.bool.isRequired
 };
