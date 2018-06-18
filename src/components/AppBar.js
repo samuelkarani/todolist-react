@@ -35,12 +35,6 @@ const AppBar = ({
     </div>
 
     <div>
-      <button className="uk-button uk-button-default uk-form-small">
-        Organize
-      </button>
-    </div>
-
-    <div>
       <button
         className="uk-button uk-button-small uk-button-default"
         onClick={handleClearCompleted}

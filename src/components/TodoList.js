@@ -7,14 +7,15 @@ const TodoList = ({
   todoList,
   handleEditTodo,
   handleDuplicateTodo,
-  handleRemoveTodo
+  handleRemoveTodo,
+  focusFirstTodo
 }) => (
   <div>
     <ul
       className="uk-list uk-list-divider js-filter"
       uk-sortable="handle: .uk-sortable-handle"
     >
-      {todoList.map(todo => (
+      {todoList.map((todo, idx) => (
         <TodoItem
           status={todo.completed ? "completed" : "active"}
           key={todo.id}
@@ -24,6 +25,7 @@ const TodoList = ({
           handleEditTodo={handleEditTodo}
           handleRemoveTodo={handleRemoveTodo}
           handleDuplicateTodo={handleDuplicateTodo}
+          focusFirstTodo={focusFirstTodo && idx === 0 ? true : false}
         />
       ))}
     </ul>
@@ -34,7 +36,8 @@ TodoList.propTypes = {
   todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired,
   handleEditTodo: PropTypes.func.isRequired,
   handleDuplicateTodo: PropTypes.func.isRequired,
-  handleRemoveTodo: PropTypes.func.isRequired
+  handleRemoveTodo: PropTypes.func.isRequired,
+  focusFirstTodo: PropTypes.bool.isRequired
 };
 
 export default TodoList;

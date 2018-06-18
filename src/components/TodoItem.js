@@ -8,7 +8,8 @@ const TodoItem = ({
   status,
   handleEditTodo,
   handleRemoveTodo,
-  handleDuplicateTodo
+  handleDuplicateTodo,
+  focusFirstTodo
 }) => (
   <li data-status={status}>
     <div className="uk-flex uk-flex-middle uk-grid">
@@ -32,6 +33,7 @@ const TodoItem = ({
           type="text"
           name="title"
           value={title}
+          autoFocus={focusFirstTodo}
           onChange={e => handleEditTodo({ title: e.target.value, id })}
         />
       </div>
@@ -61,7 +63,8 @@ TodoItem.propTypes = {
   status: PropTypes.string.isRequired,
   handleEditTodo: PropTypes.func.isRequired,
   handleRemoveTodo: PropTypes.func.isRequired,
-  handleDuplicateTodo: PropTypes.func.isRequired
+  handleDuplicateTodo: PropTypes.func.isRequired,
+  focusFirstTodo: PropTypes.bool.isRequired
 };
 
 export default TodoItem;

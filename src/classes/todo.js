@@ -5,7 +5,7 @@ export default class Todo {
     else this.id = ID();
 
     if (props && props.title) this.title = props.title;
-    else this.title = "";
+    else this.title = "todo...";
 
     if (props && props.completed) this.completed = props.completed;
     else this.completed = false;
