@@ -115,9 +115,14 @@ export default class App extends PureComponent {
 
   handleFilter = () => {
     let todoList = this.state.todoList;
-    const filter = this.state.filter;
+    const { filter, status } = this.state;
     if (filter) todoList = todoList.filter(todo => todo.title.includes(filter));
     const itemsLeft = computeTodoLeft(todoList);
+    if (status === "active")
+      todoList = todoList.filter(todo => todo.completed === false);
+    if (status === "completed")
+      todoList = todoList.filter(todo => todo.completed === true);
+
     return {
       todoList,
       itemsLeft
