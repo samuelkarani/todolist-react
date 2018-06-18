@@ -7,8 +7,7 @@ const TodoList = ({
   todoList,
   handleEditTodo,
   handleDuplicateTodo,
-  handleRemoveTodo,
-  focusFirstTodo
+  handleRemoveTodo
 }) => (
   <div>
     <ul

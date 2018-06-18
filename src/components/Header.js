@@ -9,7 +9,7 @@ const Header = ({
   status
 }) => {
   return (
-    <div className="uk-grid uk-child-width-1-3@s uk-flex-middle">
+    <div className="uk-grid uk-flex uk-flex-between uk-flex-middle">
       <div className="uk-grid uk-grid-small">
         <div>
           <input
@@ -48,7 +48,7 @@ const Header = ({
         </li>
       </ul>
 
-      <div className="uk-text-right">
+      <div>
         <p className="uk-text-meta uk-text-small">{`
         ${itemsLeft} item${itemsLeft > 1 ? "s" : ""} left`}</p>
       </div>
