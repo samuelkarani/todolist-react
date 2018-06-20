@@ -1,33 +1,43 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import TodoItem from "./TodoItem";
 import PropTypes from "prop-types";
 import TodoClass from "../classes/todo";
 
-const TodoList = ({
-  todoList,
-  handleEditTodo,
-  handleDuplicateTodo,
-  handleRemoveTodo
-}) => (
-  <div>
-    <ul
-      className="uk-list uk-list-divider js-filter"
-      uk-sortable="handle: .uk-sortable-handle"
-    >
-      {todoList.map((todo, idx) => (
-        <TodoItem
-          key={todo.id}
-          id={todo.id.toString()}
-          title={todo.title}
-          completed={todo.completed}
-          handleEditTodo={handleEditTodo}
-          handleRemoveTodo={handleRemoveTodo}
-          handleDuplicateTodo={handleDuplicateTodo}
-        />
-      ))}
-    </ul>
-  </div>
-);
+const TodoList = class extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const {
+      todoList,
+      handleEditTodo,
+      handleDuplicateTodo,
+      handleRemoveTodo
+    } = this.props;
+
+    return (
+      <div>
+        <ul
+          className="uk-list uk-list-divider js-filter"
+          uk-sortable="handle: .uk-sortable-handle"
+        >
+          {todoList.map((todo, idx) => (
+            <TodoItem
+              key={todo.id}
+              id={todo.id.toString()}
+              title={todo.title}
+              completed={todo.completed}
+              handleEditTodo={handleEditTodo}
+              handleRemoveTodo={handleRemoveTodo}
+              handleDuplicateTodo={handleDuplicateTodo}
+            />
+          ))}
+        </ul>
+      </div>
+    );
+  }
+};
 
 TodoList.propTypes = {
   todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired,

@@ -10,7 +10,7 @@ const AppBar = ({
   filter
 }) => (
   <div className="uk-flex uk-flex-middle uk-flex-between">
-    <div className="uk-grid uk-grid-small">
+    <div className="uk-grid uk-grid-small uk-flex-middle">
       <div>
         <button uk-marker="" onClick={handleAdd} />
       </div>
@@ -19,7 +19,6 @@ const AppBar = ({
         <span className="uk-text-meta uk-text-uppercase">add</span>
       </div>
     </div>
-
     <div>
       <Search
         handleSearch={handleSearch}
