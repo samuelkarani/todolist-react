@@ -26,7 +26,6 @@ const AppBar = ({
         filter={filter}
       />
     </div>
-
     <div>
       <a
         onClick={handleClearCompleted}
