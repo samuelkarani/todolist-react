@@ -77,14 +77,10 @@ const TodoItem = class extends PureComponent {
               onChange={e =>
                 handleEditTodo({ completed: e.target.checked, id })
               }
+              uk-tooltip="complete"
             />
           </div>
-          <div>
-            <span
-              className="uk-sortable-handle uk-margin-small-right"
-              uk-icon="icon: table"
-            />
-          </div>
+
           <div className="uk-width-expand">
             <input
               className="uk-input uk-form-blank"
@@ -103,6 +99,7 @@ const TodoItem = class extends PureComponent {
               className="uk-icon-link"
               uk-icon="copy"
               onClick={() => handleDuplicateTodo(id)}
+              uk-tooltip="duplicate"
             />
           </div>
           <div>
@@ -110,6 +107,7 @@ const TodoItem = class extends PureComponent {
               className="uk-icon-link"
               uk-icon="close"
               onClick={() => handleRemoveTodo(id)}
+              uk-tooltip="remove"
             />
           </div>
         </div>

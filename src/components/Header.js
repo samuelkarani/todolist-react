@@ -17,13 +17,8 @@ const Header = ({
             type="checkbox"
             checked={allCompleted}
             onChange={handleToggleCompleteAll}
+            uk-tooltip="title: toggle complete all; pos: right"
           />
-        </div>
-
-        <div className="uk-visible@m">
-          <span className="uk-text-margin-small-left uk-text-meta uk-text-uppercase">
-            toggle all
-          </span>
         </div>
       </div>
 

@@ -6,6 +6,8 @@ import TodoList from "./TodoList";
 import AppBar from "./AppBar";
 import Header from "./Header";
 
+const INITIAL_TODO_LENGTH = 7;
+
 function convertIdsToStrings(todoList) {
   return todoList.map(todo => {
     todo.id = todo.id.toString();
@@ -140,6 +142,7 @@ export default class App extends PureComponent {
     axios
       .get("https://jsonplaceholder.typicode.com/todos")
       .then(res => res.data)
+      .then(data => data.slice(0, INITIAL_TODO_LENGTH))
       .then(todoList => convertIdsToStrings(todoList))
       .then(todoList =>
         todoList.map(

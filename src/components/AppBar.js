@@ -12,7 +12,15 @@ const AppBar = ({
   <div className="uk-flex uk-flex-middle uk-flex-between">
     <div className="uk-grid uk-grid-small uk-flex-middle">
       <div>
-        <button uk-marker="" onClick={handleAdd} />
+        <button
+          className="uk-icon-button"
+          uk-icon="plus"
+          onClick={handleAdd}
+          style={{
+            backgroundColor: "#ee395b",
+            color: "#fff"
+          }}
+        />
       </div>
 
       <div className="uk-visible@m">
@@ -27,7 +35,7 @@ const AppBar = ({
       />
     </div>
     <div>
-      <a
+      <button
         onClick={handleClearCompleted}
         className="uk-icon-button uk-margin-small-right uk-hidden@m"
         uk-icon="close"

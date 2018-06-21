@@ -5,10 +5,6 @@ import PropTypes from "prop-types";
 import TodoClass from "../classes/todo";
 
 const TodoList = class extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   renderItem = (index, key) => {
     const todo = this.props.todoList[index];
     return (
@@ -25,13 +21,6 @@ const TodoList = class extends PureComponent {
   };
 
   render() {
-    const {
-      todoList,
-      handleEditTodo,
-      handleDuplicateTodo,
-      handleRemoveTodo
-    } = this.props;
-
     return (
       <div>
         <ul
