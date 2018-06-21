@@ -15,7 +15,7 @@ const AppBar = ({
         <button uk-marker="" onClick={handleAdd} />
       </div>
 
-      <div>
+      <div className="uk-visible@m">
         <span className="uk-text-meta uk-text-uppercase">add</span>
       </div>
     </div>
@@ -28,8 +28,13 @@ const AppBar = ({
     </div>
 
     <div>
+      <a
+        onClick={handleClearCompleted}
+        className="uk-icon-button uk-margin-small-right uk-hidden@m"
+        uk-icon="close"
+      />
       <button
-        className="uk-button uk-button-small uk-button-default"
+        className="uk-button uk-button-small uk-button-default uk-visible@m"
         onClick={handleClearCompleted}
       >
         clear completed

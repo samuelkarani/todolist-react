@@ -35,13 +35,14 @@ const TodoList = class extends PureComponent {
     return (
       <div>
         <ul
-          className="uk-list uk-list-divider js-filter uk-height-max-large uk-overflow-auto"
+          className="uk-list uk-list-divider js-filter uk-overflow-auto"
           uk-sortable="handle: .uk-sortable-handle"
+          uk-height-viewport=""
         >
           <ReactList
             itemRenderer={this.renderItem}
             length={this.props.todoList.length}
-            type="simple"
+            type="uniform"
           />
         </ul>
       </div>

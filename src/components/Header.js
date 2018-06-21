@@ -20,7 +20,7 @@ const Header = ({
           />
         </div>
 
-        <div>
+        <div className="uk-visible@m">
           <span className="uk-text-margin-small-left uk-text-meta uk-text-uppercase">
             toggle all
           </span>
@@ -48,7 +48,7 @@ const Header = ({
         </li>
       </ul>
 
-      <div>
+      <div className="uk-visible@m">
         <p className="uk-text-meta uk-text-small">{`
         ${itemsLeft} item${itemsLeft > 1 ? "s" : ""} left`}</p>
       </div>
