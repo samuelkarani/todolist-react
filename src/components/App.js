@@ -7,7 +7,7 @@ import Header from "./Header";
 
 import { generateData } from "../utils";
 
-const INITIAL_TODO_LENGTH = 10;
+const INITIAL_TODO_LENGTH = 10000;
 
 function computeTodoLeft(todoList) {
   return todoList.reduce((prev, todo) => prev + (!todo.completed ? 1 : 0), 0);
@@ -136,24 +136,41 @@ export default class App extends PureComponent {
     };
   };
 
+  getElapsedTimeInSeconds = (start, end) => end - start;
+
+  stateTime(str, start) {
+    const t = this.getElapsedTimeInSeconds(start, performance.now());
+    console.debug(`${str}, ${t}ms`);
+  }
+
   componentDidMount() {
+    console.log("start of componentDidMount");
+    let start = performance.now();
     generateData(INITIAL_TODO_LENGTH)
-      .then(todoList =>
-        todoList.map(
+      .then(todoList => {
+        this.stateTime("completed generating data", start);
+        start = performance.now();
+        return todoList.map(
           ({ title, completed, id }) =>
             new Todo({
               completed,
               title,
               id
             })
-        )
-      )
-      .then(todoList =>
-        this.setState({
-          todoList
-        })
-      )
+        );
+      })
+      .then(todoList => {
+        this.stateTime("completed creating Todo instances", start);
+        start = performance.now();
+        return this.setState(
+          {
+            todoList
+          },
+          () => this.stateTime("completed setting state with TodoList", start)
+        );
+      })
       .catch(err => console.error(err));
+    console.log("end of componentDidMount");
   }
 
   componentDidUpdate(prevProps, _) {
