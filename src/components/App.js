@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
-import "../styles/app.css";
+import "./app.css";
 import Todo from "../classes/todo";
 import TodoList from "./TodoList";
 import AppBar from "./AppBar";
