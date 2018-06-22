@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Search = ({ handleSearch, handleClearSearch, filter }) => {
+const Search = ({ handleFilter, handleClearFilter, filter }) => {
   return (
     <form
       className="uk-search uk-search-default"
@@ -12,14 +12,14 @@ const Search = ({ handleSearch, handleClearSearch, filter }) => {
         className="uk-search-input uk-form-small uk-form-width-medium"
         type="search"
         placeholder="Search..."
-        onChange={e => handleSearch(e.target.value.toLowerCase())}
+        onChange={e => handleFilter(e.target.value.toLowerCase())}
         value={filter}
       />
       {filter && (
         <button
           className="uk-form-icon uk-form-icon-flip"
           uk-icon="icon: close"
-          onClick={handleClearSearch}
+          onClick={handleClearFilter}
         />
       )}
     </form>
@@ -27,8 +27,8 @@ const Search = ({ handleSearch, handleClearSearch, filter }) => {
 };
 
 Search.propTypes = {
-  handleSearch: PropTypes.func.isRequired,
-  handleClearSearch: PropTypes.func.isRequired,
+  handleFilter: PropTypes.func.isRequired,
+  handleClearFilter: PropTypes.func.isRequired,
   filter: PropTypes.string.isRequired
 };
 

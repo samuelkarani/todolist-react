@@ -37,7 +37,7 @@ const TodoItem = class extends PureComponent {
   handleBlur = (e, id) => {
     const { title } = this.state;
     if (title) {
-      this.props.handleEditTodo({ title, id });
+      this.props.handleUpdateTodo({ title, id });
     } else {
       this.setState({
         title: this.props.title
@@ -51,7 +51,7 @@ const TodoItem = class extends PureComponent {
     if (e.which === 13) {
       if (title) {
         this.blurInput();
-        this.props.handleEditTodo({ title, id });
+        this.props.handleUpdateTodo({ title, id });
       } else {
         this.setState({
           title: this.props.title
@@ -70,7 +70,7 @@ const TodoItem = class extends PureComponent {
     const {
       id,
       completed,
-      handleEditTodo,
+      handleUpdateTodo,
       handleRemoveTodo,
       handleDuplicateTodo
     } = this.props;
@@ -86,7 +86,7 @@ const TodoItem = class extends PureComponent {
               type="checkbox"
               checked={completed}
               onChange={e =>
-                handleEditTodo({ completed: e.target.checked, id })
+                handleUpdateTodo({ completed: e.target.checked, id })
               }
               uk-tooltip="complete"
             />
@@ -132,7 +132,7 @@ TodoItem.propTypes = {
   isNew: PropTypes.bool.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  handleEditTodo: PropTypes.func.isRequired,
+  handleUpdateTodo: PropTypes.func.isRequired,
   handleRemoveTodo: PropTypes.func.isRequired,
   handleDuplicateTodo: PropTypes.func.isRequired
 };

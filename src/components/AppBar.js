@@ -5,8 +5,8 @@ import Search from "./Search";
 const AppBar = ({
   handleClearCompleted,
   handleAdd,
-  handleSearch,
-  handleClearSearch,
+  handleFilter,
+  handleClearFilter,
   filter
 }) => (
   <div className="uk-flex uk-flex-middle uk-flex-between">
@@ -29,8 +29,8 @@ const AppBar = ({
     </div>
     <div>
       <Search
-        handleSearch={handleSearch}
-        handleClearSearch={handleClearSearch}
+        handleFilter={handleFilter}
+        handleClearFilter={handleClearFilter}
         filter={filter}
       />
     </div>
@@ -53,8 +53,8 @@ const AppBar = ({
 AppBar.propTypes = {
   handleClearCompleted: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired,
-  handleClearSearch: PropTypes.func.isRequired,
+  handleFilter: PropTypes.func.isRequired,
+  handleClearFilter: PropTypes.func.isRequired,
   filter: PropTypes.string.isRequired
 };
 

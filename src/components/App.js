@@ -22,13 +22,13 @@ export default class App extends PureComponent {
     newId: null
   };
 
-  handleSearch = phrase => {
+  handleFilter = phrase => {
     this.setState({
       filter: phrase
     });
   };
 
-  handleClearSearch = () => {
+  handleClearFilter = () => {
     this.setState({ filter: "" });
   };
 
@@ -74,7 +74,7 @@ export default class App extends PureComponent {
     });
   };
 
-  handleEditTodo = ({ completed, title, id }) => {
+  handleUpdateTodo = ({ completed, title, id }) => {
     this.setState(prevState => {
       const todoList = prevState.todoList.map(todo => {
         if (todo.id === id) {
@@ -176,8 +176,8 @@ export default class App extends PureComponent {
               filter={filter}
               handleAdd={this.handleAddTodo}
               handleClearCompleted={this.handleClearCompleted}
-              handleSearch={this.handleSearch}
-              handleClearSearch={this.handleClearSearch}
+              handleFilter={this.handleFilter}
+              handleClearFilter={this.handleClearFilter}
             />
             <hr />
             <div className="uk-grid">
@@ -193,7 +193,7 @@ export default class App extends PureComponent {
                   <hr />
                   <TodoList
                     todoList={filteredTodoList}
-                    handleEditTodo={this.handleEditTodo}
+                    handleUpdateTodo={this.handleUpdateTodo}
                     handleRemoveTodo={this.handleRemoveTodo}
                     handleDuplicateTodo={this.handleDuplicateTodo}
                     newId={newId}
