@@ -7,7 +7,7 @@ import Header from "./Header";
 
 import { generateData } from "../utils";
 
-const INITIAL_TODO_LENGTH = 20000;
+const INITIAL_TODO_LENGTH = 20;
 
 function computeTodoLeft(todoList) {
   return todoList.reduce((prev, todo) => prev + (!todo.completed ? 1 : 0), 0);
