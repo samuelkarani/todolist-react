@@ -15,4 +15,4 @@ Todo items are:
 
 Additional: shows stats on active and completed todo items
 
-### online sandbox link: ![sandbox]()
+Demo: [Codesandbox](https://codesandbox.io/s/github/samuelkarani/todolist-react/tree/master/)
