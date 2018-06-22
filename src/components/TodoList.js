@@ -32,7 +32,7 @@ const TodoList = class extends PureComponent {
           <ReactList
             itemRenderer={this.renderItem}
             length={this.props.todoList.length}
-            type="uniform"
+            type="simple"
           />
         </ul>
       </div>

@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import axios from "axios";
 import "./app.css";
 import Todo from "../classes/todo";
 import TodoList from "./TodoList";
@@ -8,14 +7,7 @@ import Header from "./Header";
 
 import { generateData } from "../utils";
 
-const INITIAL_TODO_LENGTH = 10;
-
-function convertIdsToStrings(todoList) {
-  return todoList.map(todo => {
-    todo.id = todo.id.toString();
-    return todo;
-  });
-}
+const INITIAL_TODO_LENGTH = 1000;
 
 function computeTodoLeft(todoList) {
   return todoList.reduce((prev, todo) => prev + (!todo.completed ? 1 : 0), 0);
