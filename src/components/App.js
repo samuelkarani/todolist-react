@@ -6,7 +6,9 @@ import TodoList from "./TodoList";
 import AppBar from "./AppBar";
 import Header from "./Header";
 
-const INITIAL_TODO_LENGTH = 7;
+import { generateData } from "../utils";
+
+const INITIAL_TODO_LENGTH = 10;
 
 function convertIdsToStrings(todoList) {
   return todoList.map(todo => {
@@ -143,20 +145,31 @@ export default class App extends PureComponent {
   };
 
   componentDidMount() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos")
-      .then(res => res.data)
-      .then(data => data.slice(0, INITIAL_TODO_LENGTH))
-      .then(todoList => convertIdsToStrings(todoList))
+    generateData(INITIAL_TODO_LENGTH)
       .then(todoList =>
         todoList.map(
-          ({ title, completed, id }) => new Todo({ title, completed, id })
+          ({ title, completed, id }) =>
+            new Todo({
+              completed,
+              title,
+              id
+            })
         )
       )
-      .then(todoList => this.setState({ todoList }))
-      .catch(() => {
-        console.error("could not fetch todoList");
+      .then(todoList =>
+        this.setState({
+          todoList
+        })
+      )
+      .catch(err => console.error(err));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.newId === this.props.newId) {
+      this.setState({
+        newId: null
       });
+    }
   }
 
   render() {
