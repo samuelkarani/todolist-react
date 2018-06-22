@@ -1,5 +1,3 @@
-# Todolist with React
-
 ## Features:
 
 Todo items are:
@@ -13,6 +11,6 @@ Todo items are:
 - mass clearable
 - filterable
 
-Additional: shows stats on active and completed todo items
+_Additional_: shows stats on active and completed todo items
 
 Demo: [Codesandbox](https://codesandbox.io/s/github/samuelkarani/todolist-react/tree/master/)
