@@ -13,4 +13,4 @@ Todo items are:
 
 _Additional_: shows stats on active and completed todo items
 
-Demo: [Codesandbox](https://codesandbox.io/s/github/samuelkarani/todolist-react/tree/master/)
+Demo: [Codesandbox](https://codesandbox.io/s/62xo25528k)
