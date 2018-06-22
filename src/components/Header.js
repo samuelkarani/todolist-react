@@ -22,7 +22,7 @@ const Header = ({
         </div>
       </div>
 
-      <ul className="uk-subnav uk-subnav-pill">
+      {/* <ul className="uk-subnav uk-subnav-pill">
         <li
           onClick={() => handleChangeStatus("all")}
           className={status === "all" ? "uk-active" : ""}
@@ -41,7 +41,7 @@ const Header = ({
         >
           <a>Completed</a>
         </li>
-      </ul>
+      </ul> */}
 
       <div className="uk-visible@m">
         <p className="uk-text-meta uk-text-small">{`
