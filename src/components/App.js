@@ -7,7 +7,7 @@ import Header from "./Header";
 
 import { generateData } from "../utils";
 
-const INITIAL_TODO_LENGTH = 1000;
+const INITIAL_TODO_LENGTH = 10;
 
 function computeTodoLeft(todoList) {
   return todoList.reduce((prev, todo) => prev + (!todo.completed ? 1 : 0), 0);
@@ -156,7 +156,7 @@ export default class App extends PureComponent {
       .catch(err => console.error(err));
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, _) {
     if (prevProps.newId === this.props.newId) {
       this.setState({
         newId: null
