@@ -24,7 +24,8 @@ export default class App extends PureComponent {
     todoList: [],
     allCompleted: false,
     filter: "",
-    status: "all"
+    status: "all",
+    newId: null
   };
 
   handleSearch = phrase => {
@@ -67,7 +68,9 @@ export default class App extends PureComponent {
     this.setState(prevState => {
       let updates = {};
       const todoList = prevState.todoList;
-      todoList.unshift(new Todo());
+      const newTodo = new Todo();
+      todoList.unshift(newTodo);
+      updates = Object.assign(updates, { newId: newTodo.id });
       updates = Object.assign(updates, { todoList: todoList.slice() });
       if (prevState.filter) {
         updates = Object.assign(updates, { filter: "" });
@@ -104,7 +107,8 @@ export default class App extends PureComponent {
       });
       todoList.splice(idx + 1, 0, duplicatedTodo);
       return {
-        todoList: todoList.slice()
+        todoList: todoList.slice(),
+        newId: duplicatedTodo.id
       };
     });
   };
@@ -156,7 +160,7 @@ export default class App extends PureComponent {
   }
 
   render() {
-    const { allCompleted, filter, status, todoList } = this.state;
+    const { allCompleted, filter, status, todoList, newId } = this.state;
     const { filteredTodoList, itemsLeft } = this.handleFilter();
 
     return (
@@ -187,6 +191,7 @@ export default class App extends PureComponent {
                     handleEditTodo={this.handleEditTodo}
                     handleRemoveTodo={this.handleRemoveTodo}
                     handleDuplicateTodo={this.handleDuplicateTodo}
+                    newId={newId}
                   />
                 </div>
               )}

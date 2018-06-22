@@ -19,6 +19,11 @@ const TodoItem = class extends PureComponent {
     this.inputRef.current.blur();
   }
 
+  selectInput() {
+    this.focusInput();
+    this.inputRef.current.select();
+  }
+
   handleChange = (e, id) => {
     const title = this.inputRef.current.value.toLowerCase();
     this.setState({
@@ -54,6 +59,12 @@ const TodoItem = class extends PureComponent {
       }
     }
   };
+
+  componentDidMount(prevProps, prevState) {
+    if (this.props.isNew) {
+      this.selectInput();
+    }
+  }
 
   render() {
     const {
@@ -118,6 +129,7 @@ const TodoItem = class extends PureComponent {
 
 TodoItem.propTypes = {
   id: PropTypes.string.isRequired,
+  isNew: PropTypes.bool.isRequired,
   completed: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   handleEditTodo: PropTypes.func.isRequired,

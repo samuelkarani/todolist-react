@@ -10,6 +10,7 @@ const TodoList = class extends PureComponent {
     return (
       <TodoItem
         key={todo.id}
+        isNew={this.props.newId === todo.id}
         id={todo.id}
         title={todo.title}
         completed={todo.completed}
@@ -40,6 +41,7 @@ const TodoList = class extends PureComponent {
 };
 
 TodoList.propTypes = {
+  newId: PropTypes.string,
   todoList: PropTypes.arrayOf(PropTypes.instanceOf(TodoClass)).isRequired,
   handleEditTodo: PropTypes.func.isRequired,
   handleDuplicateTodo: PropTypes.func.isRequired,
